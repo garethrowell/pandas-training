@@ -1,0 +1,14 @@
+
+
+Ch 1 - Preliminaries
+
+What kinds of data? structured data
+    tabular - spreadsheet - relational database
+	multi-dimensional arrays
+	related tables (SQL)
+	time series (even or uneven intervals)
+
+Essential Python Libraries
+   Numby - ndarray - functions for arrays - reading / writing arrays
+   linear algebra fourier transform random numbers - C/C++ 
+   

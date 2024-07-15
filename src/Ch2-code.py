@@ -9,31 +9,28 @@ data = [np.random.standard_normal() for i in range(7)]
 data
 
 
-
-
- b = [1, 2, 3]
- b?
- print?
+b = [1, 2, 3]
+b?
+print?
  
  #  object introspection 
     
- 
- 
- def add_numbers(a, b):
+
+def add_numbers(a, b):
      
 
-    """
-    Add two numbers together
+  """
+  Add two numbers together
 
-    Returns
-    -------
-    the_sum : type of arguments
-    """
-    return a + b        
+  Returns
+  -------
+  the_sum : type of arguments
+  """
+  return a + b        
  
 
 # Python Language Basics  
-----------------------------------------------------------
+# ----------------------------------------------------------
 
 
 # use of colons and indentation (use 4 spaces, not tabs)
