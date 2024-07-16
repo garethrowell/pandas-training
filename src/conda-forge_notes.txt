@@ -1,0 +1,17 @@
+
+
+ ------------------------
+| conda-forge_notes.txt |
+ -----------------------
+
+https://conda-forge.org/
+
+https://conda-forge.org/miniforge/
+
+https://github.com/conda-forge/miniforge
+
+
+Miniforge is community version of miniconda that pulls packages *ONLY* from the conda-forge channel. 
+
+
+

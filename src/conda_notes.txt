@@ -1,0 +1,13 @@
+
+
+-------------------
+| conda_notes.txt |
+-------------------
+
+https://docs.conda.io/en/latest/index.html
+
+https://conda-forge.org/
+
+
+
+
