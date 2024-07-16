@@ -1,0 +1,40 @@
+    
+
+Ch 1 - Preliminaries
+
+What kinds of data? structured data
+    tabular - spreadsheet - relational database
+	multi-dimensional arrays
+	related tables (SQL)
+	time series (even or uneven intervals)
+
+Essential Python Libraries
+    NumPy
+        ndarray - functions for arrays - reading / writing arrays
+	    linear algebra - fourier transform - random numbers - C/C++ 
+    pandas
+	     panel data - DataFrame and Series - SQL-like operations
+    matplotlib
+	    plots and 2 D visualizations - default visualizations
+	IPython and Jupyter 
+	    IPython began in 2001 Fernando Perez's side project
+		now one of most important data tools
+		execute - explore workflow
+		Jupyter began 2014 - web notebook - 40 languages
+	SciPy
+	     collection of packages
+		 scipy.integrate - numerical integration
+		 scipy.linalg - linear algebra
+		 scipy.optimize - optimize (minimizeize) and root values
+		 scipy.signal - signal processing tools
+		 scipy.sparse - sparse matrices and sparse linear systems
+		 scipy.special - wrapper around SPECFUN (Fortran library)
+		 scipy.stats - standard continuous and descrete probability 
+	scikit-learn
+	    general purpose ML toolkit - includes classification, regression, clustering, PCA, model selection, preprocessing features. 
+	statsmodels
+	    classical statistics, econometrics 
+	
+Installation and setup
+   
+	
