@@ -36,5 +36,42 @@ Essential Python Libraries
 	    classical statistics, econometrics 
 	
 Installation and setup
+    Miniforge and conda forge
+	    conda config --add channels conda-forge
+		conda config --set channel_priority strict
+		conda create -y -n pydata-book python=3.10
+		conda activate pydata-book
+		conda install -y pandas jupyter matplotlib
+		conda info
+		conda list
+
+Book overview
+    Intro to NumPy
+	Intro to pandas
+	Rest of book; data analysis topics using pandas, NumPy and matplotlib
+
+Tasks
+    Interacting with the outside world
+	Preparation
+	Transformation
+	Modeling and computation
+	Presentation
+	
+Using the following code bloxk before running examples:
+
+import numby ad np
+import pandas as pd
+pd.options.display.max_columns = 20
+pd.options.display.max_rows = 20
+pd.options.display.max_colwidth = 80
+np.set_printoptions(precision=4, suppress=True)
+
+https://github.com/wesm/pydata-book datasets and code examples
+
+import conventions....
+
+
+		
+	
    
 	
