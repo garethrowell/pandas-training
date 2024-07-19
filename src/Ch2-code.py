@@ -81,8 +81,30 @@ a = [1, 2, 3]
 
 b = a
 
+b
+
 # b now references [1, 2, 3]
 # a new copy is NOT created 
+
+
+a.append(4)
+
+b
+
+# When you pass objects as options to a function,
+#  THE NEW LOCAL VARIABLES REFERENCE THE ORIGINAL OBJECTS
+#  WITHOUT COPYING!!
+
+def append_element(some_list, element):
+    somelist.append(element)
+    
+data = [1, 2, 3]
+
+append_element(data, 4)
+
+data # [1, 2, 3, 4]
+
+
 
 # Variables are names for objects within a particular namespace
 # the type information is stored in the object itself
@@ -141,50 +163,28 @@ getattr(a, "split")
 
 # duck typing 
 
+# don't care about type, but need to know about whether it has certain methods or behavior
+# for example, does it implement the iterator protocol, _iter_ magic method
+
+def isiterable(obj):
+    try:
+        iter(obj)
+        return True
+    except TypeError: # not interable
+        return False
+        
+        
+isiterable("a string")
+
+isiterable([1, 2, 3])
+
+isiterable(5)
 
 
 
 
-
-
-
-
-
-def append_element(some_list, element):
-  some_list.append(element)  
-    
-    
- data = [1, 2, 3]
+# importing modules ------------------------ <<<<<<<<<<<<<<<< stopped here
  
- append_element(data, 4)
-
-data
-
-
-# dynamic references, strong types ------------------------
-
-a = 5
-
-type(a)
-
-
-a = "foo"
-
-type(a)
-
-# strong types
-
-a = 4.5
-
-b = 2
-
-print(f"a is {type(a)}, b is {type(b)}")
-
-a/b   #<<<<<<<<< implicit conversion to float
-
-
-# importing modules ------------------------
-
 # some_module.py
 PI = 3.14159
 
