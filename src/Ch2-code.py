@@ -182,8 +182,7 @@ isiterable(5)
 
 
 
-
-# importing modules ------------------------ <<<<<<<<<<<<<<<< stopped here
+# importing modules 
  
 # some_module.py
 PI = 3.14159
@@ -202,53 +201,85 @@ pi = some_module.PI
 import some_module as sm
 from some_module import PI as pi, g as gf
 
+    
+
 r1 = sm.f(pi)
 r2 = gf(6, pi)
 
 
+#  Binary operators
 
-# templates and format() -----------------
+a + b
+
+a - b
+
+a * b
+
+a / b
+
+a // b  # a divided by b dropping fractional remainder
+
+a ** b
+
+a & b  # True if both are true
+
+a | b # True if either a or b is True
+
+a ^ b  # True if either a or b is True but not both
+
+a == b
+
+a != b
+
+a < b, a <= b 
+
+a > b, a >= b
+
+a is b  # True if a and b reference the same object
+
+a is not b  # True if a and b reference different objects
+
+# is keyword
+
+a = [1, 2, 3]
+
+b = a
+
+c = list(a) # list always creates a new Python list
+
+a is b
+
+a is not c
+
+a == c #  not the same thing as 'a is c'
+
+# Use 'is' and 'is not'to check for 'None'
+
+a = None
+
+a is None
+
+# Mutable and immutable objects
+
+# mutable objects include
+    # lists
+    # dictionaries
+    # NumPy arrays
+    # most user defined classes
+    
+a_list = ["foo", 2, [4,5]]
+
+a_list[2] = (3, 4)
+
+a_list
+
+# immutable objects include strings and tuples
 
 
-template = "{0:.2f} {1:s} are worth US${2:d}"
-
-template.format(88.46, "Argentine Pesos", 1)
-
-
-# f-strings ----------------
-
-amount = 10
-
-rate = 88.46
-
-currency = "Pesos"
-
-f"{amount} {currency} is worth US${amount / rate}"
+    
+# 
 
 
-
-# Booleans -------------------
-
-True and True
-
-False or True
-
-int(False)
-
-int(True)
-
-a = True
- 
-b = False
- 
-not a
- 
-not b
- 
-
-#   Dates and times ------------------------
- 
- 
  
  
  
