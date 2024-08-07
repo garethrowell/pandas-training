@@ -68,7 +68,19 @@ np.set_printoptions(precision=4, suppress=True)
 
 https://github.com/wesm/pydata-book datasets and code examples
 
-import conventions....
+also see local pydata-book repo 
+
+import conventions
+
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+import statsmodels as sm
+
+
+
+
 
 
 		
