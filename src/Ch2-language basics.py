@@ -1,5 +1,6 @@
 
 
+
 # 2.2 IPython Basics ---------------------------------------------------
 
 import numpy as np
@@ -29,8 +30,22 @@ def add_numbers(a, b):
   return a + b        
  
 
-# Python Language Basics  
+
 # ----------------------------------------------------------
+# 2.3 Python Language Basics  
+# ----------------------------------------------------------
+
+
+# Language Semantics
+# ------------------
+
+# Scalar Types
+# ------------
+
+# Control Flow
+# ------------
+
+
 
 
 # use of colons and indentation (use 4 spaces, not tabs)
