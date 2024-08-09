@@ -1,7 +1,20 @@
 
 
+# --------------------------
+# 2.3 Python language basics
+# --------------------------
 
-# 2.2 IPython Basics ---------------------------------------------------
+# Language semantics
+# ------------------
+
+
+# Scalar types
+# ------------
+
+# Control flow
+# ------------
+
+
 
 import numpy as np
 
