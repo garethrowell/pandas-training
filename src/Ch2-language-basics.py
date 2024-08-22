@@ -318,6 +318,86 @@ c.count("\n")
 
 a = "this is a string"
 
+a[10] = "f"
+
+# instead, you need to create a new string
+
+b = a.replace("string", "longer string")
+
+b
+
+# cast to string using str()
+
+a = 5.6
+
+s = str(a)
+
+print(s)
+
+# Strings as sequences
+
+s = "python"
+
+list(s)
+
+s[:3]
+
+
+# \ as escape character
+
+s = "12\\34"
+
+print(s)
+
+
+# use raw strings, r, to when interpreting slashes as is
+
+s = r"this\as\no\special\characters"
+
+s
+
+
+# adding two strings concatencates them
+
+a = "this is the first half"
+
+b = " and this is the second half"
+
+a + b
+
+
+# using the string format method
+
+template = "{0:.2f} {1:s} are worth US${2:d}"
+
+template.format(88.46, " Argentine Pesos", 1)
+
+
+# using Python 3.6 f-strings
+
+amount = 10
+
+rate = 88.46
+
+currency = "Pesos"
+
+result = f"{amount} {currency} is worth US${amount / rate}"
+
+result
+
+# including format specifiers
+
+f"{amount} {currency} is worth US${amount / rate:.2f}"
+
+
+
+
+
+
+
+
+
+
 
 
 
