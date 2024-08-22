@@ -1,64 +1,15 @@
 
 
-# ----------------------------------------------------
-# 2.3 Python language basics
-# ----------------------------------------------------
-
-# Language semantics
-# ------------------
-
-
-# Scalar types
-# ------------
-
-# Control flow
-# ------------
-
-
-
-import numpy as np
-
-data = [np.random.standard_normal() for i in range(7)]
-
-data
-
-
-b = [1, 2, 3]
-b?
-print?
- 
- #  object introspection 
-    
-
-def add_numbers(a, b):
-     
-
-  """
-  Add two numbers together
-
-  Returns
-  -------
-  the_sum : type of arguments
-  """
-  return a + b        
- 
-
 
 # ----------------------------------------------------------
 # 2.3 Python Language Basics  
 # ----------------------------------------------------------
 
 
+
+
 # Language Semantics
-# ------------------
-
-# Scalar Types
-# ------------
-
-# Control Flow
-# ------------
-
-
+# ----------------------------------------------------------
 
 
 # use of colons and indentation (use 4 spaces, not tabs)
@@ -301,11 +252,84 @@ a_list[2] = (3, 4)
 
 a_list
 
+
 # immutable objects include strings and tuples
 
 
+a_tuple = (3, 5, (4, 5))
+
+a_tuple[1] = "four" # throws a type error
 
 
- 
- 
- 
+# Scalar types
+# ----------------------------------------------------------
+
+# None, str, bytes, float, bool, int, 
+
+# Numeric types
+
+# int
+
+ival = 17239871
+
+ival
+
+ival ** 6
+
+# float
+
+fval = 7.243
+
+fval
+
+fval2 = 6.78e-5
+
+fval2
+
+
+# int division
+
+3 / 2
+
+3 // 2
+
+# strings
+
+a = 'one way of writing a string'
+a
+
+b = "another way"
+b
+
+# multiline string
+
+c = """
+This is a longer string that
+spans multiple lines
+"""
+c
+
+# how many lines text
+
+c.count("\n")
+
+
+# Strings are immmutable
+
+a = "this is a string"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
