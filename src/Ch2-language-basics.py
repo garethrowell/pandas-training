@@ -390,6 +390,144 @@ result
 f"{amount} {currency} is worth US${amount / rate:.2f}"
 
 
+# Bytes and unicode
+
+# UTF-8
+
+val = "español"
+
+val
+
+val_uts8 = val.encode("utf-8")
+
+val_uts8
+
+type(val_uts8)
+
+val_uts8.decode("utf-8")
+
+
+# Other coding systems
+
+val.encode("latin")
+
+val.encode("utf-16")
+
+
+# Booleans
+
+True and True
+
+False and True
+
+# Converting to integer
+
+int(False)
+
+int(True)
+
+# using not with Boolean values
+
+a = True
+
+b = False
+
+not a
+
+not b
+
+# Type casting ----
+
+s = "3.14159"
+
+type(s)
+
+fval = float(s)
+
+type(fval)
+
+int(fval)
+
+bool(fval)
+
+bool(0)
+
+
+# None ------
+
+a = None
+
+a is None
+
+b = 5
+
+b is not None
+
+True
+
+# None and function arguments
+
+def add_and_maybe_multiple(a, b, c=None):
+    result = a + b
+    
+    if c is not None:
+        result = result * c
+        
+    return result
+    
+    
+# datetime, date, time types
+
+from datetime import datetime, date, time
+
+dt = datetime(2011, 10, 29, 20, 30, 21)
+
+dt.day
+
+dt.date()
+
+dt.time()
+
+dt.strftime("%Y-%m-%d %H:%M")
+
+datetime.strptime("20091021", "%Y%m%d")
+
+# see Table 11-2 for full list of format specifications
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
