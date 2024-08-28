@@ -494,7 +494,68 @@ datetime.strptime("20091021", "%Y%m%d")
 
 # see Table 11-2 for full list of format specifications
 
+dt_hour = dt.replace(minute=0, second=0)
 
+dt_hour
+
+dt
+
+dt2 = datetime(2011, 11, 15, 22, 30)
+
+delta = dt2 - dt
+
+delta
+
+dt
+
+dt + delta
+
+
+
+# Contol flow
+# ----------------------------------------------------------
+
+
+# if, elif, and else
+
+x = -5
+
+if x < 0:
+    print("Its negative")
+
+
+if x < 0:
+    print("It's negative")
+elif x == 0:
+    print("Equal to zero")
+elif 0 < x < 5:
+    print("Positive but smaller than 5")
+else:
+    print("Positive and large than or equal to 5")
+    
+   
+# Chaining comparisons
+
+4 > 3 > 2 > 1
+
+
+# for loops
+
+for value in collection:
+    
+sequence = [1, 2, None, 4, None, 5]
+total = 0
+
+# using continue
+
+for value in sequence:
+    if value is None:
+        continue
+    total += value
+    print("total = ", total)
+    
+    
+# using break
 
 
 
