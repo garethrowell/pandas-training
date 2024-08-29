@@ -557,6 +557,92 @@ for value in sequence:
     
 # using break
 
+sequence = [1, 2, 0, 4, 6, 5, 2, 1]
+total_until_5 = 0
+for value in sequence:
+    if value == 5:
+        print("break")
+        break      
+    total_until_5 += value
+    print(value)
+ 
+ # break only affects inner loop
+ 
+ for i in range(4):
+    for j in range(4):
+        if j > i:
+            print("break")
+            break
+        print(i, j)
+        
+            
+# typical use of for loop - unpack an interator
+
+for a, b, c in iterator:
+    # do something
+
+
+# while loops
+
+x = 256
+total = 0
+while x > 0:
+    if total > 500:
+        break
+    total += x
+    x = x // 2
+    print(x, total)
+    
+    
+# pass is a "do nothing" aka "no-op" statement
+
+
+iterator = [250, -100, 50, -25, 12, -6, 0, 6, -12, 25]
+
+for x in iterator:
+    if x < 0:
+        print("negative!")
+    elif x == 0:
+        # TODO: put something smart here
+        print("pass")
+        pass
+    else:
+        print("positive")
+        
+
+# range generates a sequence of evenly spaced integers
+
+range(10)
+
+list(range(10))
+
+# giving start, end and step
+
+list(range(0, 20, 2))
+
+list(range(5, 0, -1))
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+ 
+ 
+ 
+ 
+    
+    
+    
 
 
 
