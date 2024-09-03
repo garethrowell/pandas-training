@@ -623,74 +623,22 @@ list(range(0, 20, 2))
 list(range(5, 0, -1))
 
 
+# a common use of range
 
+seq = [1, 2, 3, 4]
 
-
-
-
-
-
-
-
-
+for i in range(len(seq)):
+    print(f"element {i}: {seq[i]}")
     
     
-    
- 
- 
- 
- 
-    
-    
-    
+# often, the default interator is what you want...
 
+total = 0
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+for i in range(100_000):
+    # % it the modulo operator
+    if i % 3 == 0 or i % 5 == 0:
+        total += i
 
 
 
