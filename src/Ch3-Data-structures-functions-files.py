@@ -204,18 +204,86 @@ b_list.remove("foo")
 
 b_list
 
+# Using in keyword
+# This is much slower than using dictionaries and sets
+
+"dwarf" in b_list
+
+"dwarf" not in b_list
+
+# Concatenating and combining lists
+
+[4, None, "foo"] + [7, 8, (2, 3)]
+
+# using the extend keyword
+
+x = [4, None,"foo"]
+
+x.extend([7, 8, (2, 3)])
+
+x
+
+# Using extend is usually better than + concetenation
+# + requires creating a copy
+
+everything = []
+for chunk in list_of_lists:
+    everything.extend(chunk)
+ 
+# is faster than
+
+everything = []
+for chunk in list_of_lists:
+    everything = everyting + chunk
+    
+    
+       
+# Sorting ----------------------
+
+# sorting in place (no copies)
+
+a = [7, 2, 5, 1, 3]
+
+a.sort()
+
+a
+
+# here we are passing a secondary sort key
+
+b = ["saw", "small", "He", "foxes", "six"]
+
+b.sort(key=len)
+
+b
+
+# Slicing ----------------------
+
+seq = [7, 2, 3, 7, 5, 6, 0, 1]
+
+seq[1:5]
+
+seq[3:5] = [6, 3]
+
+seq
+
+# default start and stop indices
 
 
+seq[:5]
 
+seq[3:]
 
+# negative indices
 
+seq[-4:]
 
+seq[-6: -2]
 
+# a second colon to say every other element as follows
 
+seq[::2]
 
-
-
-
+seq[::-1] # this reverses the order!!
 
 
 
@@ -226,6 +294,122 @@ b_list
 
 # Dictionary
 # ----------
+
+# aka hash maps or associative arrays
+
+# key + value - both are objects
+
+empty_dict = {}
+
+d1 = {"a": "some value", "b": [1, 2, 3, 4]}
+
+d1
+
+
+# use the same syntax as lists or tubles
+
+d1[7] = "an integer"
+
+d1
+
+# checking if a dictionary contains a key
+
+"b" in d1
+
+# delete a value using either del or pop
+
+d1[5] = "some value"
+
+d1["dummy"] = "another value"
+
+d1
+
+
+del d1[5]
+
+d1
+
+ret = d1.pop("dummy")
+
+ret
+
+d1
+
+# list() keys and values method gives iterators for keys
+# and values respectively
+
+d1
+
+list(d1.keys())
+
+list(d1.values())
+
+# iterating over both keys and values with items()
+# gives 2 tuples
+
+list(d1.items())
+
+# merge one dictionary into another as well as
+# updating in place
+
+d1.update({"b": "foo", "c": 12})
+
+# creating dictionaries from sequences
+# when you want to pair up element-wise
+
+# this is an alternative to dictionary comprehensions
+# discussed later on - this is the general form
+
+mapping = {}
+for key, value in zip(key_list, value_list):
+    mapping[key] = value
+    
+# zip defined later on
+# dictionaries are essentially collections of 2-tuples
+
+tuples = zip(range(5), reversed(range(5)))
+
+tuples
+
+mapping = dict(tuples)
+
+mapping
+
+# Default values
+
+# common to see the following
+
+if key in some_dict:
+    value = some_dict[key]
+else:
+    value = default_value
+
+# this allows get and pop to take default values
+
+value = some_dict.get(key, default_value)
+
+# get by default returns None while
+# pop will raise an exception
+
+# values in a dictionary may come from another collection
+# like a list
+# here, we categorize words by their first letter
+
+words = ["apple", "bat", "bar", "atom", "book"]
+
+by_letter = {}
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+
+
+
+
+
+
 
 
 # Set
