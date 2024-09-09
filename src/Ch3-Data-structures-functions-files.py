@@ -287,11 +287,6 @@ seq[::-1] # this reverses the order!!
 
 
 
-
-
-
-
-
 # Dictionary
 # ----------
 
@@ -399,21 +394,117 @@ words = ["apple", "bat", "bar", "atom", "book"]
 
 by_letter = {}
 
-<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+for word in words:
+    letter = word[0]
+    if letter not in by_letter:
+        by_letter[letter] = [word]
+    else:
+        by_letter[letter].append(word)
+        
+by_letter
 
+# setdefault method to simplify
 
+by_letter = {}
 
+for word in words:
+    letter = words[0]
+    by_letter.setdefault(letter, []).append(word)
+    
+by_letter
 
+# built-in collections module has class defaultdict 
+# makes even easier
+# pass type or functions
 
+from collections import defaultdict
 
+by_letter = defaultdict(list)
 
+for word in words:
+    by_letter[word[0]].append(word)
+    
+by_letter
 
+# Valid dictionary key types
 
+# keys are generally immutable scalars or tuples
+# "hashability" - determine with has function
 
+hash("string")
+
+hash((1, 2, (2, 3)))
+
+hash((1,2, [2, 3]))
+
+# To use a list as a key, convert to tuple
+
+d = {}
+
+d[tuple([1, 2, 3])] = 5
+
+d1
+
+hash(tuple([1, 2, 3]))
 
 
 # Set
 # ---
+
+# set is unordered collection of unique elements
+# create a set using set function or set literal {}
+
+set([2, 3, 3, 1, 3, 3])
+
+{2, 2, 2, 1, 3, 3}
+
+# set operations - union, intersection, difference, symmetric_difference
+
+a = {1, 2, 3, 4, 5}
+
+b = {3, 4, 5, 6, 7, 8}
+
+# using union or the binary operator |
+
+a.union(b)
+
+a | b
+
+# intersection with intersection() or & operator
+
+a.intersection(b)
+
+a & b
+
+# other set operators
+
+c = a.copy()
+
+c
+
+c |= b # update
+
+c
+
+d = a.copy()
+ 
+d
+
+d &= b # intersection
+
+d
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+
+
+
+
+
+
 
 # Built-in Sequence Functions
 # ---------------------------
