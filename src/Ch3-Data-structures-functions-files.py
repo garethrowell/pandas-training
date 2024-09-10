@@ -494,20 +494,85 @@ d &= b # intersection
 
 d
 
-<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# set elements are immutable and must be hashable
+# you can convert them to tuples first
 
+my_data = [1, 2, 3, 4]
 
+my_data
 
+my_set = {tuple(my_data)}
 
+my_set
 
+a_set = {1, 2, 3, 4, 5}
 
+a_set
 
+# is a subset of
+{1, 2, 3}.issubset(a_set)
 
+# contains all the elements of
+a_set.issuperset({1, 2, 3})
+
+# true if and only if contents are equal
+{1, 2, 3} == {1, 3, 2}
 
 
 
 # Built-in Sequence Functions
 # ---------------------------
+# use these at every opportunity
+
+# enumerate
+
+# keeping track of index of current item
+
+index = 0
+for value in collection:
+    # do something
+    index += 1
+    
+ # this is so common that there is specific function 
+ 
+ for index, value in enumerate(collection):
+     # do something
+     
+# sorted
+# returns new sorted list from elements of any sequence
+
+sorted([7, 1, 2, 6, 0, 3, 2])
+
+sorted("horse race")
+
+# zip
+# pairs up elements of list, tuples, or other sequences 
+# into list of tuples
+
+seq1 = ["foo", "bar", "baz"]
+seq2 = ["one","two", "three"]
+
+zipped = zip(seq1, seq2)
+
+list(zipped)
+
+# zip creates shortest sequence of arbitrary number of sequences
+
+seq3 = [False, True]
+
+list(zip(seq1, seq2, seq3))
+
+# combine zip with enumerate to interate of multiple sequences
+
+for index, (a, b) in enumerate(zip(seq1, seq2)):
+    print(f"{index}: {a}, {b}")
+    
+    
+
+
+
+
+
 
 # List, set and dictionary comprehensions
 # ---------------------------------------
