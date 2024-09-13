@@ -8,6 +8,9 @@
 # 3.1 Data structures and sequences
 # ---------------------------------
 
+import pandas as pd
+
+
 # Tuple
 # -----
 
@@ -567,33 +570,293 @@ list(zip(seq1, seq2, seq3))
 for index, (a, b) in enumerate(zip(seq1, seq2)):
     print(f"{index}: {a}, {b}")
     
-    
+# reversed is a generator
 
-
-
-
-
+list(reversed(range(10)))
+ 
 
 # List, set and dictionary comprehensions
 # ---------------------------------------
+
+[expr for value in collection if condition]
+
+# meaning...
+
+result = []
+
+for value in collecteion:
+    if condition:
+        result.append(expr)
+        
+ 
+# for example
+ 
+strings = ["a", "as", "bat", "car", "dove", "python"]
+ 
+# set and dictionary comprehensions
+
+dict_comp = {key-exp: value-expr for value in collection if condition}
+
+set_comp = {expr for value in collection if condition}
+
+ # using set to find the unique length in strings
+ 
+unique_lengths = {len(x) for x in strings}
+ 
+unique_lengths
+ 
+ # a dictionary comprehensions example
+ 
+ loc_mapping = {value: index for index, value in enumerate(strings)}
+ 
+ loc_mapping
+ 
+ # nested list comprehensions
+ 
+ # list of lists with names
+ 
+ all_data = [["John","Emily","Michael", "Mary", "Steven"],
+             ["Maria","Juan","Javier","Marta","Pilar"]]
+             
+ all_data
+ 
+ # list all the names with two or more 'a's in them
+ 
+names_of_interest = []
+ 
+for names in all_data:
+    enough_as = [name for name in names if name.count("a") >= 2]
+    names_of_interest.extend(enough_as)
+    
+names_of_interest
+
+# nested list comprehensions, example with tuples
+
+some_tuples = [(1, 2, 3), (4, 5, 6), (7, 8, 9)]
+
+some_tuples
+
+flattened = [x for tup in some_tuples for x in tup]
+
+flattened
+
+# the order of the for loops looks like this
+
+flattened = []
+
+for tup in some_tuples:
+    for x in tup:
+        flattened.append(x)
+        
+# probably shouldn't go further than two loops
+ 
+# this is different from above - a list comprehension inside 
+# another list comprehension
+
+[[x for x in tup] for tup in some_tuples]
+
+# vs
+
+[x for tup in some_tuples for x in tup]
+
 
 
 # -------------
 # 3.2 Functions
 # -------------
 
+# your basic function
+
+def my_function(x, y):
+    return x + y
+    
+    
+my_function(1, 2)
+
+result = my_function(1, 2)
+
+result
+
+# multiple returns are okay
+# None is returned if no return reached
+
+def function_without_return(x):
+    print(x)
+    
+result = function_without_return("hello!")
+
+result
+
+print(result)
+
+print(function_without_return("hello!"))
+
+# functions can have positional arguments
+# functions can also have keyword arguments as defaults 
+#    or optional arguments
+
+# below, z is an optional argument with a default value of 1.5
+
+def my_function2(x, y, z=1.5):
+    if z > 1:
+        print("z > 1")
+        return z * (x + y)
+    else:
+        print("else")
+        return z / (x + y)
+        
+# The keyword is optional, but the positional
+# are required
+# the keyword must follow the positional 
+
+my_function2(5, 6, z=0.7)
+
+my_function2(3.14, 7, 3.5)
+
+my_function2(10, 20)   
+
 
 # Namespaces, scope and local functions
 # -------------------------------------
 
+# Functions can access local variables
+# *and* outside the functions including global
+# variables
+
+# namespace = variable scope
+
+# function's arguments have local namespace
+# local namespace is destroyed when the function 
+# is finished
+
+def func(): # function is called
+    a = []  # empty list a is created
+    for i in range(5):
+        a.append(i) # five elements are appended
+        print(a)
+print(a)
+# a is destroyed when function is ended
+
+# here we define list a before the function
+# and every call to func() will modify list a
+a = []
+
+def func():
+    for i in range(5):
+        a.append(i)
+        print(a)
+             
+print(a)
+
+
+# using global and nonlocal
+# use globals to store some kind of state in a system
+# generally not good practice
+
+a = None
+
+def bind_a_variable():
+    global a
+    a = []
+    
+bind_a_variable()
+
+print(a)
+    
 # Returning multiple values
 # ---------------------------
+
+def f():
+    a = 5
+    b = 6
+    c = 7
+    return a, b, c 
+ 
+f()
+
+# This is really cool...
+
+a, b, c = f()
+
+a
+
+b
+
+c
+
 
 # Functions are objects
 # ---------------------
 
+# This facilitates many constructs
+
+# Some messy data
+
+states = ["   Alabama", "Georgia!", "Georgia", "georgia", \
+"FlOrIda", "south   carolina##", "West virginia?"]
+
+
+# importing regex module
+
+import re
+
+# using regex expressions
+
+def clean_strings(strings):
+    result = []
+    for value in strings:
+        value = value.strip()
+        value = re.sub("[!#?]", "", value)
+        value = value.title()
+        result.append(value)
+    return result
+
+clean_strings(states)
+
+# Alternatively, make a list of desired operations
+# This "functional pattern" allows for easy modification
+# clean_strings is more generic
+
+
+def remove_punctuation(value):
+    return re.sub("[!#?]", "", value)
+
+clean_ops = [str.strip, remove_punctuation, str.title]
+
+def clean_strings(strings, ops):
+    result = []
+    for value in strings:
+        for func in ops:
+            value= func(value)
+        result.append(value)
+    return result
+    
+clean_strings(states, clean_ops)
+
+
 # Anonymous (Lambda) Funtions
 # ---------------------------
+
+# consist of single statement 
+# resulting in a returned value
+
+# very helpful for data analysis
+# where functions are used as arguments
+
+def short_function(x):
+    return x * 2
+
+equiv_anon = lambda x: x * 2
+
+
+
+
+
+
+
+
+
+
 
 # Generators
 # ----------
