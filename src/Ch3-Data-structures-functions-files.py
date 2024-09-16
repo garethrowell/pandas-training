@@ -8,9 +8,6 @@
 # 3.1 Data structures and sequences
 # ---------------------------------
 
-import pandas as pd
-
-
 # Tuple
 # -----
 
@@ -848,18 +845,64 @@ def short_function(x):
 
 equiv_anon = lambda x: x * 2
 
+# another example
+
+def apply_to_list(some_list, f):
+    return[f(x) for x in some_list]
+    
+ints = [4, 0, 1, 5, 6]
+
+apply_to_list(ints, lambda x:x * 2)
+
+    
+# an example using sort and string length 
+# to sort collection of strings by their
+# distict letters
+
+strings = ["foo", "card", "bar", "aaaa", "abab"]
 
 
+strings.sort(key = lambda x:len(set(x)))
 
-
-
-
-
-
-
+strings
 
 # Generators
 # ----------
+
+# an iterator protocol
+# generic way to make objects iterable
+# create a generator with the key word yield
+
+some_dict = {"a": 1, "b": 2, "c": 3}
+
+for key in some_dict:
+    print(key)
+    
+a
+b
+c
+
+    
+dict_iterator = iter(some_dict)
+dict_iterator
+
+list(dict_iterator)
+
+def squares(n=10):
+    print("Generating sqouares from 1 to {n ** 2}")
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
 
 # Errors and exception handling
 # -----------------------------
