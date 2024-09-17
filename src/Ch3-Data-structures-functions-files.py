@@ -946,25 +946,85 @@ for letter, names in itertools.groupby(names, first_letter):
     print(letter, list(names)) # names in a generator
 
 
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Errors and exception handling
 # -----------------------------
+
+# Example of code throwing exception
+
+num = float("1.2345")
+
+num
+
+float("something") # this cast won't work
+
+# to catch this exception
+
+def attempt_float(x):
+    try:
+        return float(x)
+    except:
+        return x
+        
+float((1,2)) # also raises exception
+
+attempt_float("1.2345")
+
+attempt_float("something")
+
+# To just capture value error
+
+def attempt_float(x):
+    try:
+        return float(x)
+    except ValueError:
+        return x
+        
+        
+attempt_float((1, 2)) # throws exception
+
+# catch multiple types of exceptions 
+
+def attempt_float(x):
+    try:
+        return float(x)
+    except (TypeError, ValueError):
+        return x
+        
+attempt_float((1, 2))
+
+# To execute - whether or not try succeeds
+# use finally
+# here, file f will always get closed
+
+f = open(path, mode="w")
+
+try:
+    write_to_file(f)
+finally:
+    f.close()
+    
+    
+ 
+ 
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # ----------------------------------
