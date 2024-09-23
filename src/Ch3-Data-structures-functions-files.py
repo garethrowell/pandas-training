@@ -934,7 +934,6 @@ dict((i , i** 2) for i in range(5))
 # example - groupby takes any sequence and function
 #    grouping consecutive elements in sequence by 
 #    return value of function
-
 import itertools
 
 def first_letter(x):
@@ -1003,27 +1002,28 @@ try:
 finally:
     f.close()
     
+# In this case, code only executes if try
+# block succeeds using else:
+
+    f = open(path, mode="w")
+
+try:
+    write_to_file(f)
+else:
+    print("Succeeded")
+finally:
+    f.close()
     
- 
- 
-        
-        
+    
+# Exceptions in IPython
+# with %run command - get full stack trace
 
+%run examples/ipython_bug.py
 
+#control amount of context shown
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+%xmode Plain <--> Verbose
+# more details in appendix B
 
 
 
@@ -1031,8 +1031,115 @@ finally:
 # 3.3 Files and the operating system
 # ----------------------------------
 
+# most common
+
+pandas.read_csv
+
+path = 'C:\\Users\\growell\\pandas-training\\src\\BasalArea.txt'
+
+f = open(path, encoding="utf-8") # default is read mode
+
+for line in f:
+    print(line)
+    
+# removing EOL markers
+
+lines = [x.strip() for x in open(path,encoding="utf-8")]
+
+lines
+    
+f.close()
+
+# With statement automatically closes f when exiting the block
+
+with open(path, encoding='utf-8') as f:
+    lines = [x.rstrip() for x in f]
+    
+# The following write mode overwrites any existing file!!
+
+f = open(path, "w")
+
+# read/write modes - r, w, x -write only fails with path already exists
+# a - append to files, r+ - read and write, b - combine with other modes 
+# for binary, t - text mode (Unicode)(default)
+
+# read methods - read, seek, tell
+
+
+path_bin = 'C:\\Users\\growell\\pandas-training\\src\\BasalArea.xlsx'
+
+f1 = open(path)
+
+f1.read(10)
+
+f2 = open(path_bin, mode="rb")
+
+f2.read(10)
+
+f1.tell() # current file position
+
+f2.tell()
+
+# Using sys module
+
+import sys
+sys.getdefaultencoding()
+
+f1.seek(3) # changes to file position
+
+f1.read(1) 
+
+f1.tell()
+
+# close files
+
+f1.close()
+f2.close()
+
+#write() and writelines methods
+
+path
+
+with open("C:\\Users\\growell\\pandas-training\\src\\tmp.txt", mode="w") as handle:
+    handle.writelines(x for x in open(path) if len(x) > 1)
+    
+with open("C:\\Users\\growell\\pandas-training\\src\\tmp.txt") as f:
+    lines = f.readlines()
+    
+lines
+
+ # File methods - read([size]}, readable(), readlines([size]), write(string)
+ # writeable(), writelines(strings), close(), flush(), seak(pos), seekable(), 
+ # seekable(), tell(), closed, encoding
+
 # Bytes and unicode with files
 
+# default is text mode (Unicode)
 
+with open(path) as f:
+    chars = f.read(10)
+    
+chars
 
+len(chars)
+
+with open(path_bin, mode="rb") as f:
+    data = f.read(10)
+
+data
+
+data.decode("utf-8")
+
+# The above didn't decode
+
+# Text mode and the encoding option
+
+sink_path = "C:\\Users\\growell\\pandas-training\\src\\tmp.csv"
+
+with open(path) as source:
+    with open(sink_path, "x", encoding="iso-8859-1") as sink:
+        sink.write(source.read())
+        
+
+THis is some text
 
