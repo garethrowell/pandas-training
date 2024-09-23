@@ -1,64 +1,15 @@
 
 
-# --------------------------
-# 2.3 Python language basics
-# --------------------------
-
-# Language semantics
-# ------------------
-
-
-# Scalar types
-# ------------
-
-# Control flow
-# ------------
-
-
-
-import numpy as np
-
-data = [np.random.standard_normal() for i in range(7)]
-
-data
-
-
-b = [1, 2, 3]
-b?
-print?
- 
- #  object introspection 
-    
-
-def add_numbers(a, b):
-     
-
-  """
-  Add two numbers together
-
-  Returns
-  -------
-  the_sum : type of arguments
-  """
-  return a + b        
- 
-
 
 # ----------------------------------------------------------
 # 2.3 Python Language Basics  
 # ----------------------------------------------------------
 
 
+
+
 # Language Semantics
-# ------------------
-
-# Scalar Types
-# ------------
-
-# Control Flow
-# ------------
-
-
+# ----------------------------------------------------------
 
 
 # use of colons and indentation (use 4 spaces, not tabs)
@@ -301,11 +252,397 @@ a_list[2] = (3, 4)
 
 a_list
 
+
 # immutable objects include strings and tuples
 
 
+a_tuple = (3, 5, (4, 5))
+
+a_tuple[1] = "four" # throws a type error
 
 
+# Scalar types
+# ----------------------------------------------------------
+
+# None, str, bytes, float, bool, int, 
+
+# Numeric types
+
+# int
+
+ival = 17239871
+
+ival
+
+ival ** 6
+
+# float
+
+fval = 7.243
+
+fval
+
+fval2 = 6.78e-5
+
+fval2
+
+
+# int division
+
+3 / 2
+
+3 // 2
+
+# strings
+
+a = 'one way of writing a string'
+a
+
+b = "another way"
+b
+
+# multiline string
+
+c = """
+This is a longer string that
+spans multiple lines
+"""
+c
+
+# how many lines text
+
+c.count("\n")
+
+
+# Strings are immmutable
+
+a = "this is a string"
+
+a[10] = "f"
+
+# instead, you need to create a new string
+
+b = a.replace("string", "longer string")
+
+b
+
+# cast to string using str()
+
+a = 5.6
+
+s = str(a)
+
+print(s)
+
+# Strings as sequences
+
+s = "python"
+
+list(s)
+
+s[:3]
+
+
+# \ as escape character
+
+s = "12\\34"
+
+print(s)
+
+
+# use raw strings, r, to when interpreting slashes as is
+
+s = r"this\as\no\special\characters"
+
+s
+
+
+# adding two strings concatencates them
+
+a = "this is the first half"
+
+b = " and this is the second half"
+
+a + b
+
+
+# using the string format method
+
+template = "{0:.2f} {1:s} are worth US${2:d}"
+
+template.format(88.46, " Argentine Pesos", 1)
+
+
+# using Python 3.6 f-strings
+
+amount = 10
+
+rate = 88.46
+
+currency = "Pesos"
+
+result = f"{amount} {currency} is worth US${amount / rate}"
+
+result
+
+# including format specifiers
+
+f"{amount} {currency} is worth US${amount / rate:.2f}"
+
+
+# Bytes and unicode
+
+# UTF-8
+
+val = "español"
+
+val
+
+val_uts8 = val.encode("utf-8")
+
+val_uts8
+
+type(val_uts8)
+
+val_uts8.decode("utf-8")
+
+
+# Other coding systems
+
+val.encode("latin")
+
+val.encode("utf-16")
+
+
+# Booleans
+
+True and True
+
+False and True
+
+# Converting to integer
+
+int(False)
+
+int(True)
+
+# using not with Boolean values
+
+a = True
+
+b = False
+
+not a
+
+not b
+
+# Type casting ----
+
+s = "3.14159"
+
+type(s)
+
+fval = float(s)
+
+type(fval)
+
+int(fval)
+
+bool(fval)
+
+bool(0)
+
+
+# None ------
+
+a = None
+
+a is None
+
+b = 5
+
+b is not None
+
+True
+
+# None and function arguments
+
+def add_and_maybe_multiple(a, b, c=None):
+    result = a + b
+    
+    if c is not None:
+        result = result * c
+        
+    return result
+    
+    
+# datetime, date, time types
+
+from datetime import datetime, date, time
+
+dt = datetime(2011, 10, 29, 20, 30, 21)
+
+dt.day
+
+dt.date()
+
+dt.time()
+
+dt.strftime("%Y-%m-%d %H:%M")
+
+datetime.strptime("20091021", "%Y%m%d")
+
+# see Table 11-2 for full list of format specifications
+
+dt_hour = dt.replace(minute=0, second=0)
+
+dt_hour
+
+dt
+
+dt2 = datetime(2011, 11, 15, 22, 30)
+
+delta = dt2 - dt
+
+delta
+
+dt
+
+dt + delta
+
+
+
+# Contol flow
+# ----------------------------------------------------------
+
+
+# if, elif, and else
+
+x = -5
+
+if x < 0:
+    print("Its negative")
+
+
+if x < 0:
+    print("It's negative")
+elif x == 0:
+    print("Equal to zero")
+elif 0 < x < 5:
+    print("Positive but smaller than 5")
+else:
+    print("Positive and large than or equal to 5")
+    
+   
+# Chaining comparisons
+
+4 > 3 > 2 > 1
+
+
+# for loops
+
+for value in collection:
+    
+sequence = [1, 2, None, 4, None, 5]
+total = 0
+
+# using continue
+
+for value in sequence:
+    if value is None:
+        continue
+    total += value
+    print("total = ", total)
+    
+    
+# using break
+
+sequence = [1, 2, 0, 4, 6, 5, 2, 1]
+total_until_5 = 0
+for value in sequence:
+    if value == 5:
+        print("break")
+        break      
+    total_until_5 += value
+    print(value)
  
+ # break only affects inner loop
  
- 
+ for i in range(4):
+    for j in range(4):
+        if j > i:
+            print("break")
+            break
+        print(i, j)
+        
+            
+# typical use of for loop - unpack an interator
+
+for a, b, c in iterator:
+    # do something
+
+
+# while loops
+
+x = 256
+total = 0
+while x > 0:
+    if total > 500:
+        break
+    total += x
+    x = x // 2
+    print(x, total)
+    
+    
+# pass is a "do nothing" aka "no-op" statement
+
+
+iterator = [250, -100, 50, -25, 12, -6, 0, 6, -12, 25]
+
+for x in iterator:
+    if x < 0:
+        print("negative!")
+    elif x == 0:
+        # TODO: put something smart here
+        print("pass")
+        pass
+    else:
+        print("positive")
+        
+
+# range generates a sequence of evenly spaced integers
+
+range(10)
+
+list(range(10))
+
+# giving start, end and step
+
+list(range(0, 20, 2))
+
+list(range(5, 0, -1))
+
+
+# a common use of range
+
+seq = [1, 2, 3, 4]
+
+for i in range(len(seq)):
+    print(f"element {i}: {seq[i]}")
+    
+    
+# often, the default interator is what you want...
+
+total = 0
+
+for i in range(100_000):
+    # % it the modulo operator
+    if i % 3 == 0 or i % 5 == 0:
+        total += i
+
+
+
+
+
+
+
