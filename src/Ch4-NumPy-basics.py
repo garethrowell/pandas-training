@@ -78,23 +78,79 @@ np.arange(15)
 # eye, identity
 
 
-
-
-
-
-
-
-
-
-
-
-
 # Data types for ndarrays
 # -----------------------
+
+# dtype is metadata
+
+arr1 = np.array([1, 2, 3], dtype=np.float64)
+
+arr2 = np.array([1, 2, 3], dtype=np.int32)
+
+arr1.dtype
+
+arr2.dtype
+
+
+# NumPy data types
+# int8, uint8, int16, utin16, int32, uint32, int64, uint64, 
+# float16, float32, float64, float128, comnplext64, copmlex128,
+# complex256, bool, object, string, unicode
+
+arr = np.array([1, 2, 3, 4, 5])
+
+arr.dtype
+
+arr
+
+float_arr = arr.astype(np.float64)
+
+float_arr
+
+float_arr.dtype
+
+# example of truncating with float to int
+
+arr = np.array([3.7, -1.2, -2.6, 0.5, 12.9, 10.1])
+
+arr
+
+arr.astype(np.int32)
+
+# converting strings to numerics
+# caution: _string type is fixed size and may trucate input
+
+numeric_strings = np.array(["1.25", "-9.6", "42"], dtype=np.string_)
+
+numeric_strings.astype(float)
+
+# using another array's dtype
+
+int_array = np.arange(10)
+
+int_array
+
+calibers = np.array([.22, 270, .357, .44, 50], dtype= np.float64)
+
+int_array.astype(calibers.dtype)
+
+# using short hand type code strings
+
+zeros_uint32 = np.zeros(8, dtype="u4")
+
+zeros_uint32
+
+# Note: astype *always* creates a new copy
+
 
 
 # Arithmetic with NubPy arrays
 # ----------------------------
+
+
+
+
+
 
 
 # Basic indexing and slicing
