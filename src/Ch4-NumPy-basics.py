@@ -11,6 +11,8 @@ data
 
 data * 10
 
+
+
 data + data
 
 
@@ -401,8 +403,74 @@ data
 # Fancy indexing
 # --------------
 
-# Transposing arraus and Swapping Axes
+# ALWAYS generates copy when assigning to a new variable
+
+
+# indexing using integer arrays
+
+arr = np.zeros((8, 4))
+
+arr
+
+for i in range(8):
+    arr[i] = i
+
+arr
+
+# To select subset of rows in particular order
+
+arr[[4, 3, 0, 6]]
+
+# Selecting from the end
+
+arr[[ -3, -5, -7]]
+
+# More complex...
+# Passing multiple index arrays does something different...
+# It selects a one-dimensional array of elements
+# corresponding to each tuple of indices
+
+arr = np.arange(32).reshape((8, 4))
+
+arr
+
+# here, the elements (1, 0), (5, 3), (7, 1) and (2, 2)
+arr[[1, 5, 7, 2], [0, 3, 1, 2]]
+
+# in general, same number of arrays as there are axes -> one-dimensional
+
+# Selecting a rectangular region of a matrix - this is not intuitive!!
+
+arr
+
+arr[[1, 4, 7]][:, [0, 3, 1, 2]]
+
+# modifying index vaules with fancy indexing
+
+arr
+
+arr[[1, 5, 7, 2], [0, 3, 1, 2]]
+
+arr[[1, 5, 7, 2], [0, 3, 1, 2]] = 0
+
+arr
+
+
+# Transposing arrays and Swapping Axes
 # ------------------------------------
+
+# Transposing an array is flipping it along its diagonal axis
+# This is helpful for computer graphics and also for solving
+# linear systems of equations. 
+
+arr = np.arange(15).reshape((3, 5))
+
+arr
+
+
+
+
+
 
 # -----------------------------------------------------
 # 4.2 Pseudorandom Number Generation
