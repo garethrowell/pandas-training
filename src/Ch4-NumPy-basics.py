@@ -467,18 +467,104 @@ arr = np.arange(15).reshape((3, 5))
 
 arr
 
+arr.T
+
+# Application: Computing the inner matric using the numpy dot function
+
+arr = np.array([[0, 1, 0], [1, 2, -2], [6, 3, 2], [-1, 0, -1], [1, 0, 1]])
+
+arr
+
+np.dot(arr.T, arr) # more about the dot() function in linear algebra below
 
 
+# The @ infix operator is another way to do matrix multiplication
 
+arr.T @ arr
+
+# Simple transposing with .T is a special case of swapping axes
+# In general, use swapaxes() switches a pair of axes
+
+# Note: swapaxes() also just returns a view and not a copy
+
+arr
+
+arr.swapaxes(0, 1)
 
 
 # -----------------------------------------------------
 # 4.2 Pseudorandom Number Generation
 # -----------------------------------------------------
 
+# numpy.random - supplements Python random
+# example - 4 x 4 array of normal dist
+
+samples = np.random.standard_normal(size=(4, 4,))
+
+samples
+
+# Benchmarking the performance of Numpy vs Python standard
+
+from random import normalvariate
+
+N = 1_000_000
+
+%timeit samples = [normalvariate(0, 1) for _ in range(N)]
+
+%timeit np.random.standard_normal(N)
+
+
+# Coding an explicit generator
+
+rng = np.random.default_rng(seed=12345)
+
+data = rng.standard_normal((2, 3))
+
+type(rng)
+
+# methods available for random generator objects:
+# permutation, shuffle, uniform, integers, standard_normal,
+# binomial, normal, beta, chisquare, gamma, uniform
+
+
 # ----------------------------------------------------------
 # 4.3 Universal Functions: Fast Element-wise Array Functions
 # ----------------------------------------------------------
+
+# ufunc - these are fast, element-wise array functions
+
+# unary ufuncs - many are simple element-wise transformations
+
+arr = np.arange(10)
+
+arr
+
+np.sqrt(arr)
+
+np.exp(arr)
+
+# binary ufuncs - take two arrays and return a single array
+
+x = rng.standard_normal(8)
+
+y = rng.standard_normal(8)
+
+x
+
+y
+
+# element-wise maximum of elements inx and y
+np.maximum(x, y)
+
+
+# binary ufuncs - a few can multiple arrays
+
+arr = rng.standard_normal(7) * 5
+
+
+
+
+
 
 # --------------------------------------------------------------
 # 4.4 Array-oriented Programming with Arrays
@@ -510,10 +596,6 @@ arr
 # 4.6 Linear Algebra
 # --------------------------------------------------------------
 
-
-# --------------------------------------------------------------
-# 4.7 Linear Algebra
-# --------------------------------------------------------------
 
 # --------------------------------------------------------------
 # 4.7 Example: Random walks
