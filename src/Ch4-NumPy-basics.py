@@ -553,22 +553,91 @@ x
 
 y
 
-# element-wise maximum of elements inx and y
+# element-wise maximum of elements in x and y
 np.maximum(x, y)
-
 
 # binary ufuncs - a few can multiple arrays
 
 arr = rng.standard_normal(7) * 5
 
+arr
+
+# numpy.modf - unary ufunc that returns more than one array
+
+remainder, whole_part = np.modf(arr)
+
+remainder
+
+whole_part
 
 
+# ufuncs can assign resulters to existing array using "out"
 
+arr
+
+out = np.zeros_like(arr)
+
+out
+
+np.add(arr, 1)
+
+np.add(arr, 1, out=out)
+
+ out
+
+# Some unary universal functions:
+# abs, fabs, sqrt, square, exp, log, log10, log2, log1p,
+# sign, ceil, floor, rint, modf, isnan, 
+# isfinite, isinf, cos, cosh, sinh, tan, tanh,
+# arccos, arccosh, arcsin, arcsinh, arctan, arctanh
+# logical_not
+
+# Some binary universal functions:
+# add, substract, multiply, divide, floor_divide,
+# power, maximum, fmax, minimum, fmin, mod, copysign,
+# greater, greater_equal, less, less_equal, equal, not_equal,
+# logical_and, logical_or, logical_xor
 
 
 # --------------------------------------------------------------
 # 4.4 Array-oriented Programming with Arrays
 # --------------------------------------------------------------
+
+# vectorization - replacing loops with array expressions
+
+points =  np.arange(-5, 5, 0.01) # 1000 equally spaced points
+
+points
+
+# meshgrid produces grid of (x,y) pairs
+
+xs, ys = np.meshgrid(points, points) 
+
+xs
+
+ys
+
+# here we are vectorizing with xs and ys
+
+z = np.sqrt(xs ** 2 + ys ** 2)
+
+# visualizing the Z pairs
+
+import matplotlib.pyplot as plt
+
+plt.imshow(z, cmap=plt.cm.gray, extent=[-5, 5, -5, 5])
+
+plt.colorbar()
+
+plt.title( "Image plot of $\sqrt{x^2 + y^2}$ for a grid of values")
+
+plt.show()
+
+
+
+plt.close("all")
+
+
 
 # Expressing conditional logic as Array Operations
 # ------------------------------------------------
