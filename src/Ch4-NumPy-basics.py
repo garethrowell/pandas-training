@@ -573,17 +573,7 @@ whole_part
 
 # ufuncs can assign resulters to existing array using "out"
 
-arr
 
-out = np.zeros_like(arr)
-
-out
-
-np.add(arr, 1)
-
-np.add(arr, 1, out=out)
-
- out
 
 # Some unary universal functions:
 # abs, fabs, sqrt, square, exp, log, log10, log2, log1p,
@@ -638,9 +628,53 @@ plt.show()
 plt.close("all")
 
 
-
 # Expressing conditional logic as Array Operations
 # ------------------------------------------------
+
+# numpy.where function
+
+xarr = np.array([1.1, 1.2, 1.3, 1.4, 1.5])
+
+yarr = np.array([2.1, 2.2, 2.3, 2.4, 2.5])
+
+cond = np.array([True, False, True, True, False])
+
+# list comprehension form 
+# not as efficient, using interpreted Python code
+# also does not work with multi-dimensional arrays
+
+result = [(x if c else y) for x, y, c in zip(xarr, yarr, cond)]
+
+result
+
+# do the above with numpy.where
+
+result = np.where(cond, xarr, yarr)
+
+result
+
+# second and third arguments can be scalars
+# can be used to modify matrices
+
+arr = rng.standard_normal((4, 4))
+
+arr
+
+# want to replace positives with 2 and negatives with -2
+
+arr > 0
+
+np.where(arr > 0, 2, -2)
+
+
+
+
+
+
+
+
+
+
 
 # Mathematic and statistical methods
 # ----------------------------------
