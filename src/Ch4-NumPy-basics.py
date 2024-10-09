@@ -667,20 +667,72 @@ arr > 0
 np.where(arr > 0, 2, -2)
 
 
+# combining scalars and arrays
 
-
-
-
-
-
-
-
+np.where(arr > 0, 2, arr)
+ 
 
 # Mathematic and statistical methods
 # ----------------------------------
 
+# aggregations car sometimes called reductions
+
+# NumPy allows passing arrays to be aggregated
+
+arr = rng.standard_normal((5, 4))
+
+arr.mean()
+
+np.mean(arr)
+
+arr.sum()
+
+# functions like mean and sum can optionally
+# be applied over a given axes
+
+arr
+
+arr.mean(axis=1) # compute mean across the columns
+
+arr.sum(axis=0) # compute sum down the rows
+ 
+ # accumulation functions like cumsum and cumprod 
+ # do not aggregate
+ # instead, they provide intermediate results
+ 
+arr = np.array([0, 1, 2, 3, 4, 5, 6, 7])
+ 
+arr.cumsum()
+ 
+# accumulation functions and multi-dimensional arrays
+# are partial aggregates along the indicated axis
+
+arr = np.array([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+
+arr
+
+arr.cumsum(axis=0)  # computes along the columns
+
+arr.cumsum(axis=1)  # computes along the rows
+
+
+# basic statistical methods
+# sum, mean, std, var, min, max, argmin, argmax,
+# cumsum, cumprod
+
 # Methods for Boolean arrays
 # --------------------------
+
+# Booleans are coerced to 1 (True) and 0 (Flase)
+# sum counts 1's (True's)
+
+arr = rng.standard_normal(100)
+
+
+
+
+
+
 
 # Sorting
 # -------
