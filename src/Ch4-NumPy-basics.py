@@ -728,18 +728,85 @@ arr.cumsum(axis=1)  # computes along the rows
 
 arr = rng.standard_normal(100)
 
+(arr > 0).sum() # sum all the positive values
 
+(arr <= 0).sum() # Summ all the non-positive values
 
+# using any and all with Boolean
+# can also work on any array where non-zero value is true
 
+bools = np.array([False, False, True, False])
 
+bools
 
+bools.any()
+
+bools.all()
 
 # Sorting
 # -------
 
+arr = rng.standard_normal(6)
+
+arr
+
+arr.sort()
+
+arr
+
+arr = rng.standard_normal((5, 3))
+
+arr
+
+arr.sort(axis=0) # sort across columns
+
+arr
+
+arr.sort(axis=1) # sort across rows
+
+arr
+
+# Note: numpy.sort returns a copy like python built-in sort()
+
+arr2 = np.array([5, -10, 7, 1, 0, -3])
+
+sorted_arr2 = np.sort(arr2)
+
+arr2
+
+sorted_arr2
+
+
 # Unique and other set logic
 # --------------------------
 
+# Numpy set operations for one-dimesional arrays
+
+names = np.array(["Bob", "Will", "Joe", "Bob", "Will", "Joe", "Joe"])
+
+names
+
+np.unique(names)
+
+ints = np.array([3, 3, 3, 2, 1, 1, 4, 4])
+
+np.unique(ints)
+
+# this is the pure Python alternatively
+
+sorted(set(names))
+
+
+# numpy.in1d tests membership of values in one array in another
+
+values = np.array([6, 0, 0, 4, 2, 5, 6])
+
+values
+
+np.in1d(values, [2, 3, 6])
+
+# array set operations
+# unique, intersection, union1d, in1d, setdiff1d, setor1d
 
 # --------------------------------------------------------------
 # 4.5 File Inout and Output with Arrays
