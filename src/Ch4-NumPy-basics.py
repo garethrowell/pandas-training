@@ -809,14 +809,77 @@ np.in1d(values, [2, 3, 6])
 # unique, intersection, union1d, in1d, setdiff1d, setor1d
 
 # --------------------------------------------------------------
-# 4.5 File Inout and Output with Arrays
+# 4.5 File Input and Output with Arrays
 # --------------------------------------------------------------
 
+arr = np.arange(10)
+
+# uncompressed raw binary format
+
+np.save("some_array", arr)
+
+np.load("some_array.npy")
+
+# save multiple arrays in uncompressed archive
+
+np.savez("array_archive.npz", a=arr, b=arr)
+
+arch = np.load("array_archive.npz")
+
+arch["b"]
+
+# compressed format
+
+np.savez_compressed("arrays_compressed.npz", a=arr, b=arr)
 
 
 # --------------------------------------------------------------
 # 4.6 Linear Algebra
 # --------------------------------------------------------------
+
+# linear algebra operations
+# matrix multiplication, decomnpositions, determinants, square matrix math
+
+rng = np.random.default_rng(seed=12345)
+
+x = np.array([[1., 2., 3.], [4., 5., 6.]])
+
+y = np.array([[6., 23.], [-1, 7], [8, 9]])
+
+x
+
+y
+
+x.dot(y)
+
+np.dot(x, y)  # same as previous
+
+np.ones(3)
+
+x @ np.ones(3)
+
+# numpy.linalg - matrix decompositions, inverse and determinants
+
+from numpy.linalg import inv, qr
+
+X = rng.standard_normal((5, 5))
+
+X
+
+# multiplying the transpose of X by X itself
+
+mat = X.T @ X
+
+mat
+
+inv(mat)
+
+# X.T.dot(X) computes the dot project of X and its transpose X.T
+
+mat @ inv(mat)
+
+# most commonly used linear algebra functions
+# diag, dot, trace, det, trace, det, eig, inv, pinv, qr, svd, solve, lstsq
 
 
 # --------------------------------------------------------------
