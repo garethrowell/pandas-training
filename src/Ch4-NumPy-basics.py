@@ -886,15 +886,112 @@ mat @ inv(mat)
 # 4.7 Example: Random walks
 # --------------------------------------------------------------
 
+# application of array operations
+
+import random
+import matplotlib.pyplot as plt
+
+position = 0
+
+walk = [position]
+nsteps = 1000
+for _ in range(nsteps):
+    step = 1 if random.randint(0,1) else -1
+    position += step
+    walk.append(position)
+ 
+plt.plot(walk[:1000])
+plt.show()
+
+# random coin toss
+
+nsteps = 1000
+
+rng = np.random.default_rng(seed=1235)
+
+draws = rng.integers(0, 2, size=nsteps)
+
+steps = np.where(draws == 0, 1, -1)
+
+walk = steps.cumsum()
+
+walk.min()
+
+walk.max()
+
+# first crossing time
+# when it crosses 10 either direction
+# argmax() isn't efficient because it does a full scan of array each time
+
+(np.abs(walk) >= 10).argmax()
+
+
 # Simulating many random walks at once
 # ------------------------------------
+
+# simulating 5000 random walks at once
+# see size(nwalks, nsteps) tuple below
+
+nwalks = 5000
+nsteps = 1000
+
+draws = rng.integers(0, 2, size=(nwalks, nsteps)) # 0 or 1
+
+steps = np.where(draws > 0, 1, -1)
+
+walks = steps.cumsum(axis=1)
+
+walks
+
+# calculating ax and mix values over all walks
+
+walks.max()
+
+walks.min()
+
+# calculating crossing line of abs 30 over all simulations
+# tricky because not all will reach 30 therefore use any()
+
+hits30 = (np.abs(walks) >= 30).any(axis=1)
+
+hits30 
+
+hits30.sum()
+
+# selecting rows of walks that actually cross 30
+# using argmax() across axis = 1
+
+crossing_times = (np.abs(walks[hits30]) >= 30).argmax(axis=1)
+
+crossing_times
+
+# calculating average minimum crossing time:
+
+crossing_times.mean()
+
+# trying other distributions than coin-toss
+
+draws = 0.25 * rng.standard_normal((walks, nsteps))
+
+
+steps = np.where(draws > 0, 1, -1)
+
+walks = steps.cumsum(axis=1)
+
+walks
+
+# calculating ax and mix values over all walks
+
+walks.max()
+
+walks.min()
 
 
 # --------------------------------------------------------------
 # 4.8 Conclusion
 # --------------------------------------------------------------
 
-
+# See  Appendix A for more advanced numpy 
 
 
 
