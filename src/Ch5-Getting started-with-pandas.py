@@ -98,27 +98,119 @@ pd.isna(obj4)
 
 pd.notna(obj4)
 
+# alternative Series methods
 
+obj4.isna()
 
+# Series aligns indexes for arithmetic operations
+# this is similar to a join operation
 
+obj3
 
+obj4
 
+obj3 + obj4
 
+# the Series 'name' attribute
 
+obj4.name = "population"
 
+obj4.index.name = "state"
 
+obj4
 
+# altering Series index by in-place assignment
 
+obj
 
+obj.index = ["Bob", "Steve", "Jeff", "Ryan"]
 
-
-
-
-
+obj
 
 
 # DataFrame
 # ---------
+# DataFrames are typically 2 dimensional but higher dimensions
+# work just find with hierarachical indexing
+
+# construct DataFrame using dictionary of equal-length lists
+# or numpy arrays
+
+# here, the order of the keys in data determine the DataFrame layout
+
+data = {"state": ["Ohio", "Ohio", "Ohio", "Nevada", "Nevada", "Nevada"],
+        "year": [2000, 2001, 2002, 2001, 2002, 2003],
+        "pop": [1.5, 1.7, 3.6, 2.4, 2.9, 3.2]}
+
+data
+        
+frame = pd.DataFrame(data)
+
+frame
+
+# head returns first 5 rows
+# tail returns last 5 rows
+
+frame.head()
+
+frame.tail()
+
+# controlling column arrangement
+
+pd.DataFrame(data, columns=["year", "state", "pop"])
+
+# passing a column that isn't in the dictionary
+
+frame2 = pd.DataFrame(data, columns=["year", "state", "pop", "debt"])
+
+frame2
+
+frame2.columns
+
+# Retrieving as a Series, two forms
+
+frame2["state"]
+
+frame2["year"]
+
+# Preferred form as attribute, avoid method name conflicts
+ 
+frame2.state 
+
+frame2.year 
+
+# Using iloc and loc attributes to retrieve rows
+
+frame2
+
+frame2.loc[1]
+
+frame2.iloc[2]
+
+# modifying columns by assignment
+
+frame2["debt"] = 16.5
+
+frame2
+
+frame2["debt"] = np.arange(6.)
+
+frame2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Index objects
 #--------------
