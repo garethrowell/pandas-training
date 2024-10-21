@@ -197,23 +197,117 @@ frame2["debt"] = np.arange(6.)
 
 frame2
 
+# the value length must match the df length
+
+val = pd.Series([-1.2, -1.5, -1.7], index=["two", "four", "five"])
+
+val
+
+frame2["debt"] = val
+
+# Assigning a column that doesn't exist creates new column
+
+frame2["eastern"] = frame2["state"] == "Ohio"
+
+# this doesn't work using dot notation
+
+# use del method to remove column
+
+frame2.columns
+
+del frame2["eastern"]
+
+frame2.columns
 
 
+# using nested dictionary of dictionaries
 
+populations = {"Ohio":{2000: 1.5, 2001: 1.7, 2002: 3.6}, "Nevada":{2001: 2.4, 2002: 2.4, 2002: 2.9}}
 
+populations
 
+# outer keys goes to columns, inner keys goes to rows
 
+frame3 = pd.DataFrame(populations)
 
+frame3
 
+frame3.columns
 
+# Transposing ala numpy
 
+Tframes3 = frame3.T
 
+Tframes3
 
+# Transposing back loses some data type infor
 
+Tframes3.T
+
+# using explicit index
+
+pd.DataFrame(populations, index=[2001, 2002, 2003])
+
+# distionaries with Series object
+
+pdata = {"Ohio": frame3["Ohio"][:-1], "Nevada":frame3["Nevada"][:2]}
+
+pdata
+
+pd.DataFrame(pdata)
+
+# Things that you can pass to the DataFrame constructor
+# 2D ndarray (optional row and column labels; dictionary of arrayrs, lists,
+# or tuples (all sequences must have same length; NumPy structured array; 
+# dictionary of Series; dictionary of dictionaries; list of dictionaries or Series
+# list lists or tuples (2D ndarray); another DataFrame; numpy masked array.
+
+# index names
+
+frame3.index.name = "year"
+
+frame3.columns.name = "state"
+
+frame3
+
+# DataFrame has index and column names
+# Series has name attribute
+
+# converting DataFrame to 2D ndarray
+
+frame3.to_numpy()
+
+# when columns have different data types
+
+frame2
+
+frame2.to_numpy()
 
 
 # Index objects
 #--------------
+
+# index objects hold axis labels 
+# (names, column names, axis name or names)
+
+obj = pd.Series(np.arange(3), index=["a", "b", "c"])
+
+index = obj.index
+
+index
+
+index[1:]
+
+# indexes are immutable
+
+
+
+
+
+
+
+
+
 
 
 
