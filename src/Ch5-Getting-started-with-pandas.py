@@ -300,24 +300,94 @@ index[1:]
 
 # indexes are immutable
 
+# index[1] = "d"
+# TypeError: Index does not support mutable operations
 
+# this makes is safe to share Index objects among data structures
 
+labels = pd.Index(np.arange(3))
 
+labels
 
+obj2 = pd.Series([1.5, -2.5, 0], index=labels)
 
+obj2
 
+obj2.index is labels
 
+# Index also behaves like a fixed-size set
 
+frame3
 
+frame3.columns
 
+"Ohio" in frame3.columns
+
+2003 in frame3.index
+
+# NOTE - pandas Index *can* contain duplicate labels:
+
+pd.Index(["foo", "foo", "bar", "bar"])
+
+# Some Index methods and properties
+# append(), difference(), intersection(), union(), isin(),
+# delete(), drop(), insert(), is_monotonic(), unique()
 
 # ----------------------------------------------------
 # 5.2 Essential Functionality
 # ----------------------------------------------------
 
-
 # Reindexing
 # ----------
+
+# creates new object with values rearranged to align new index
+
+obj = pd.Series([4.5, 7.2, -5.3, 3.6], index=["d", "b", "a", "c"])
+
+obj
+
+obj2 = obj.reindex(["a", "b", "c", "d", "e"])
+
+obj2
+
+# for ordered data like time series, want to fill in values when reindexing
+
+obj3 = pd.Series(["blue", "purple", "yellow"], index=[0, 2, 4])
+
+obj3
+
+obj3.reindex(np.arange(6), method="ffill")
+
+# reindex can alter rows, columns or both
+
+frame = pd.DataFrame(np.arange(9).reshape((3, 3)), 
+                    index=["a", "c", "d"], 
+                    columns=["Ohio", "Texas", "California"])
+
+frame
+
+frame2 = frame.reindex(index=["a", "b", "c", "d"])
+
+frame2
+
+# reindexing the columns with column keyword
+
+states = ["Texas", "Utah", "California"]
+
+frame.reindex(states, axis="columns")
+
+# reindex function arguments
+# labels, index, columns, axis, method (ffil - fill forwards, bfill - fill backwares),
+# fill_value, limit, tolerance, level, copy
+
+# loc operator reindex for new existing labels
+# as opposed to reindex which actually insert
+# missing data for new labels
+
+# e.g.
+
+frame.loc[["a", "d", "c"], ["California", "Texas"]]
+
 
 # Dropping Entries from an Axis
 # -----------------------------
