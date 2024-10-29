@@ -392,9 +392,76 @@ frame.loc[["a", "d", "c"], ["California", "Texas"]]
 # Dropping Entries from an Axis
 # -----------------------------
 
+# drop method returns new object with values deleted
+# from axis
+
+obj = pd.Series(np.arange(5.), index=["a", "b", "c", "d", "e"])
+
+obj
+
+new_obj = obj.drop("c")
+
+new_obj
+
+obj.drop(["d","c"])
+
+# index can be deleted from either axis with DataFrame
+
+data = pd.DataFrame(np.arange(16).reshape((4, 4)),
+                    index=["Ohio", "Colorado", "Utah", "New York"],
+                    columns=["one", "two", "three", "four"])
+
+data
+
+# drop on a sequence of labels - axis 0 is rows
+
+data.drop(index=["Colorado","Ohio"])
+
+# Use keyword "columns" to drop column labels
+
+data
+
+data.drop(columns=["two"])
+
+# using axis = 1 is same thing
+
+data.drop("two", axis=1)
+
+# or axis = "columns"
+
+data.drop("two", axis="columns")
+
 
 # Indexing, Selection and Filtering
 # ---------------------------------
+
+# Series indexing
+
+obj = pd.Series(np.arange(4.), index=["a", "b", "c", "d"])
+
+obj
+
+obj["b"]
+
+obj[1]
+
+obj[2:4]
+
+obj[["b", "a", "d"]]
+
+obj[[1, 3]]
+
+obj[obj < 2 ]
+
+# better way is to use loc() to select index values
+
+obj.loc[["b", "a", "d"]]
+
+
+
+
+
+
 
 # Arithmetic and Data Alignment
 # -----------------------------
