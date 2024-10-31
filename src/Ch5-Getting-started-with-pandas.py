@@ -457,6 +457,93 @@ obj[obj < 2 ]
 
 obj.loc[["b", "a", "d"]]
 
+# preferred because loc indexes exclusively with labels
+# and iloc indexes exclusively with integers
+# without loc, behavior of index will depend on datatype
+
+# For example... // the following is deprecated...
+
+obj1 = pd.Series([1, 2, 3]), index[2, 0, 1])
+
+obj1
+
+
+
+obj2 = pd.Series([1, 2, 3], index["a", "b", "c"])
+
+obj1
+
+obj2
+
+##....
+
+
+# Indexing into a DataFame
+
+data = pd.DataFrame(np.arange(16).reshape((4, 4)), 
+                    index=["Ohio", "Colorado", "Utah", "New York"],
+                    columns=["one", "two", "three", "four"])
+                    
+data
+
+
+data["two"]
+
+data[["three", "one"]]
+
+# Slicing or selecting with Boolean array
+
+data[:2]
+
+data[data["three"] > 5]
+
+# Using a scalar to produce a Boolean dataframe
+
+data < 5
+
+# assigning 0 to True
+
+data[data < 5] = 0
+
+# DataFrame also has loc and iloc
+
+data
+
+data.loc["Colorado"]
+
+# selecting row and column with loc
+
+data.loc["Colorado", ["two", "three"]]
+
+# similar selection using iloc
+
+data.iloc[2]
+
+data.iloc[[2, 0]]
+
+data.iloc[2, [3, 0, 1]]
+
+data.iloc[[1, 2], [3, 0, 1]]
+
+# loc and iloc work with slices, single labels or lists of labels
+
+data.loc[: "Utah", "two"]
+
+data.iloc[:, :3]
+
+data.iloc[:, :3][data.three > 5]
+
+# summary of ways to select and rearrange DataFrames
+# df[column], df.loc[rows], df.loc[:, cols], df.loc[rows, cols]
+# df.iloc[rows], df.iloc[:, cols], df.iloc[rows, cols],
+# df.at[row, col], df.iat[row, col], reindex
+
+# Integer indexing pitfalls
+
+
+
+
+
 
 
 
