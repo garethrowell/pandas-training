@@ -538,14 +538,71 @@ data.iloc[:, :3][data.three > 5]
 # df.iloc[rows], df.iloc[:, cols], df.iloc[rows, cols],
 # df.at[row, col], df.iat[row, col], reindex
 
+
+
+
+
 # Integer indexing pitfalls
+# -------------------------
 
+# pandas integer indexing works different from 
+# built=in Python structures
 
+# for example, this generates an error....
 
+ser = pd.Series(np.arange(3.))
 
+ser
 
+# ser[-1]  <<<<<<<<<<<<<<<<<<<
 
+# So the issue is *integer* indexing, which are labels
 
+# Here, we are using a non-integer index without any arrors
+
+ser2 = pd.Series(np.arange(3.), index=["a", "b", "c"])
+
+ser2
+
+ser2[-1] # this also sends off "future" warnings
+
+# Its better to use loc for labels and iloc for integers!!
+# ===========================================================
+
+ser.iloc[-1]
+
+ser2.loc["a"]
+
+# Pitfalls with chained indexing
+#-----------------------------
+
+# In general, AVOID chained indexing for assignments
+
+data
+
+data.loc[:, "one"] = 1
+
+data
+
+data.iloc[2] = 5
+
+data
+
+data.loc[data["four"] > 5] = 3
+
+data
+
+# But this DOES NOT WORK!!
+
+# data.loc[data.three == 5]["three"] = 6
+
+data
+
+# rewrite the changed assignment using single loc operation
+
+data.loc[data.three == 5, "three"] = 6
+
+data
 
 
 
