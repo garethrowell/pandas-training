@@ -627,11 +627,58 @@ s2
 s1 + s2
 
 
-# Looking at DataFrame
+# Looking at DataFrame, alignment performed on both row and columns
+# Note: NaN's for rows and columns not shared in df1 + df2
 
-df1 = pd.DataFrame(np.arange(9.).reshape((3.3)), columns=list("bcd"),
-                   u=index=["Ohio", "Texas", "Colorado"])
+df1 = pd.DataFrame(np.arange(9.).reshape((3, 3)), columns=list("bcd"), 
+                   index=["Ohio", "Texas", "Colorado"])
                    
+ df2 = pd.DataFrame(np.arange(12.).reshape((4, 3)), columns=list("bde"), 
+                   index=["Utah", "Ohio", "Texas", "Oregon"])
+                   
+df1
+
+df2
+
+df1 + df2
+
+# Next example, df1 and df2 don't share any rows or columns
+
+df1 = pd.DataFrame({"A": [1, 2]})
+
+df2 = pd.DataFrame({"B": [3, 4]})
+
+df1 
+
+df2
+
+df1 + df2
+
+# Arithmetic methods with fill values
+# Setting NA(nulls) by assigning to np.nan
+
+df1 = pd.DataFrame(np.arange(12.).reshape((3, 4)), 
+                    columns=list("abcd"))
+ 
+df2 = pd.DataFrame(np.arange(20.).reshape((4, 5)), 
+                    columns=list("abcde"))
+                                       
+df1
+
+df2
+
+df1 + df2
+
+df2.loc[1, "b"] = np.nan
+
+df1 + df2
+
+
+
+               
+
+
+
                    
 
 
