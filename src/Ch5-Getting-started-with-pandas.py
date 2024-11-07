@@ -630,11 +630,10 @@ s1 + s2
 # Looking at DataFrame, alignment performed on both row and columns
 # Note: NaN's for rows and columns not shared in df1 + df2
 
-df1 = pd.DataFrame(np.arange(9.).reshape((3, 3)), columns=list("bcd"), 
-                   index=["Ohio", "Texas", "Colorado"])
+df1 = pd.DataFrame(np.arange(9.).reshape((3, 3)), columns=list("bcd"), index=["Ohio", "Texas", "Colorado"])
+
                    
- df2 = pd.DataFrame(np.arange(12.).reshape((4, 3)), columns=list("bde"), 
-                   index=["Utah", "Ohio", "Texas", "Oregon"])
+df2 = pd.DataFrame(np.arange(12.).reshape((4, 3)), columns=list("bde"), index=["Utah", "Ohio", "Texas", "Oregon"])
                    
 df1
 
@@ -657,11 +656,9 @@ df1 + df2
 # Arithmetic methods with fill values
 # Setting NA(nulls) by assigning to np.nan
 
-df1 = pd.DataFrame(np.arange(12.).reshape((3, 4)), 
-                    columns=list("abcd"))
+df1 = pd.DataFrame(np.arange(12.).reshape((3, 4)), columns=list("abcd"))
  
-df2 = pd.DataFrame(np.arange(20.).reshape((4, 5)), 
-                    columns=list("abcde"))
+df2 = pd.DataFrame(np.arange(20.).reshape((4, 5)), columns=list("abcde"))
                                        
 df1
 
@@ -673,20 +670,174 @@ df2.loc[1, "b"] = np.nan
 
 df1 + df2
 
+# fill_value substitutes passed value with fill value
 
 
-               
+df1.add(df2, fill_value=0)
+
+# letter r reverses the argument order
+# so the following two expressions are the same
+
+1 / df1
+
+df1.rdiv(1)
+
+# Using reindexing and specifying different fill value
+
+df1.reindex(columns=df2.columns, fill_value=0)
+
+# Flexible arithmetic methods and their r equivalents
+# add, radd, sub, rsub, div, rdiv, floordiv, ffloordiv,
+# mul, rmul, pow, 
 
 
 
-                   
+# Operations between DataFrame and Series
+# ---------------------------------------
+
+# Like NumPy operations with arrays of different dimensions
+# There is arithmetic between DataFrames and Series
+
+# Begin by looking two dimensional array and one of its rows
+
+arr = np.arange(12.).reshape((3, 4))
+
+arr
+
+arr[0]
+
+# the following is called broadcasting
+
+arr - arr[0]
+
+# Operations between DataFrame and Series is like this
+
+frame = pd.DataFrame(np.arange(12.).reshape((4, 3)), 
+                    columns=list("bde"), index=["Utah", "Ohio", "Texas","Oregon"])
+                    
+series = frame.iloc[0]
+
+frame
+
+series
+
+# series and dataframe arithmetic matches index <-> columns
+
+frame - series
+
+# if index value not in DataFrame column or Series index
+# then objects reindexed to form union
+
+series2 = pd.Series(np.arange(3), index=["b", "e", "f"])
+
+series2
+
+frame + series2
+
+frame - series
+
+frame - series2
+
+# broadcasting over columns, matching on rows
+
+series3 = frame["d"]
+
+frame
+
+series3
+
+frame.sub(series3, axis="index") # the axis to match on
+
 
 
 # Function Application and Mapping
 # --------------------------------
 
+# NumPy ufuncs (element-wise array methods) work with pandas objects
+
+frame = pd.DataFrame(np.random.standard_normal((4, 3)),
+                    columns=list("bde"),
+                    index=["Utah", "Ohio", "Texas","Oregon"])
+                    
+                    
+frame
+
+np.abs(frame)
+
+
+# applying function on one-dimensional arrays to each column or row
+# using apply
+
+def f1(x):
+    return x.max() - x.min()
+    
+frame
+
+frame.apply(f1)
+
+# apply across the columns
+
+frame.apply(f1, axis="columns")
+
+# most common array statistics are DataFrame methods so
+# you don't need to use apply
+
+# apply returns scalars but it can also return Series for multiple values
+
+def f2(x):
+    return pd.Series([x.min(), x.max()], index=["min", "max"])
+    
+frame
+    
+frame.apply(f2)
+
+# can also do element-wise functions, here applying format
+
+def my_format(x):
+    return f"{x:.2f}"
+    
+frame.applymap(my_format) # applymap to be deprecated
+                            # use DataFrame.map instead
+                            
+frame["e"]
+                            
+frame["e"].map(my_format) # Using Series map
+
+
+
 # Sorting and ranking
 # -------------------
+
+# sort_index() sorts row or column labels
+
+# series example
+
+obj = pd.Series(np.arange(4), index=["d", "a", "b", "c"])
+
+obj
+
+obj.sort_index()
+
+# dataframe example
+
+frame = pd.DataFrame(np.arange(8).reshape((2, 4)),
+                     index=["three", "one"],
+                     columns=["d", "a", "b", "c"])
+                     
+frame.sort_index()
+
+frame.sort_index(axis="columns")
+
+
+
+
+
+
+
+
+
+
+
 
 # Axis Indexes with Duplicate labels
 # ----------------------------------
