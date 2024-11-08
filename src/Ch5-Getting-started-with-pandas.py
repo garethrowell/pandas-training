@@ -824,9 +824,65 @@ frame = pd.DataFrame(np.arange(8).reshape((2, 4)),
                      index=["three", "one"],
                      columns=["d", "a", "b", "c"])
                      
+frame
+                     
 frame.sort_index()
 
 frame.sort_index(axis="columns")
+
+# sorting descending order
+
+frame.sort_index(axis="columns", ascending=False)
+
+
+# sorting a Series by its values
+
+obj = pd.Series([4, 7, -3, 2])
+
+obj
+
+obj.sort_values()
+
+# missing values are sorted at the end
+
+obj = pd.Series([4, np.nan, 7, np.nan, -3, 2])
+
+obj
+
+obj.sort_values()
+
+# sorting them at the start 
+
+obj.sort_values(na_position="first")
+
+# sorting a DataFrame on more than one column
+
+frame = pd.DataFrame({"b":[4, 7, -3, 2], "a":[0, 1, 0, 1]})
+
+frame
+
+frame.sort_values("b")
+
+frame.sort_values(["a", "b"])
+
+# ranking - default is to break ties with mean rank
+
+obj = pd.Series([7, -5, 7, 4, 2, 0, 4])
+
+obj
+
+obj.rank()
+
+# assigning ranks to the order in which they are observed
+# in the data, ties are sorted base on the order in which they are observed
+
+obj.rank(method="first")
+
+# ranking in descending order
+
+obj.rank(ascending=False)
+
+# computing DataFrame ranks over rows or columns
 
 
 
