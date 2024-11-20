@@ -884,19 +884,52 @@ obj.rank(ascending=False)
 
 # computing DataFrame ranks over rows or columns
 
+frame = pd.DataFrame({"b": [4.3, 7, -3, 2], "a": [0, 1, 0, 1],
+                        "c": [-2, 5, 8, -2.5]})
+                        
+frame
 
+frame.rank(axis="columns")
 
-
-
-
-
-
-
-
+# Tie-breaking methods with rank
+# average, min, max, first, dense
 
 
 # Axis Indexes with Duplicate labels
 # ----------------------------------
+
+# All above working with unique axis labels (index values)
+# Severala pandas functions require this
+
+# Series with duplicate indieces
+
+obj = pd.Series(np.arange(5), index=["a", "a", "b", "b", "c"])
+
+obj
+
+# testing for unique using is_unique()
+
+obj.index.is_unique
+
+# This affects data selection and makes coding
+# really complicated
+
+obj["a"]
+
+obj["c"]
+
+# Likewise in data frames
+
+df = pd.DataFrame(np.random.standard_normal((5, 3)),
+                  index=["a", "a", "b", "b", "c"])
+                  
+df
+
+
+
+
+
+
 
 
 
