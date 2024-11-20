@@ -925,17 +925,36 @@ df = pd.DataFrame(np.random.standard_normal((5, 3)),
                   
 df
 
+df.loc["b"]
 
-
-
-
-
-
+df.loc["c"]
 
 
 # ----------------------------------------------------
 # 5.3 Summarizing and Computing Descriptive Statistics
 # ----------------------------------------------------
+
+# reductions or summary statistics
+
+# built-in handling for missing data
+
+df = pd.DataFrame([[1.4, np.nan], [7.1, -4.5],
+                    [np.nan, np.nan], [0.75, -1.3]],
+                    index=["a", "b", "c", "d"],
+                    columns=["one", "two"])
+                    
+df
+
+# sum method returns Series of column sums
+
+df.sum()
+
+
+
+  
+
+
+
 
 # Correlation and covariance
 # --------------------------
