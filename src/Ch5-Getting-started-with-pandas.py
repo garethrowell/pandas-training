@@ -949,15 +949,67 @@ df
 
 df.sum()
 
+df.sum(axis="columns")
 
+# Sum of only NAs is NA
+# and sum including any NA is NA
+# see the skipna=False
 
-  
+df.sum(axis="index", skipna=False)
 
+df.sum(axis="columns", skipna=False)
 
+# some aggregations require at least one non=NA
 
+df.mean(axis="columns")
+
+# common options for each reduction method
+# axis, skipna, level (for hierarachical indexed), 
+
+# returning the index values for min/max's
+
+df.idxmax()
+
+df.idxmin()
+
+# accumulations
+
+df.cumsum()
+
+# multiple summary statistics
+
+df.describe()
+
+# using describe() with non-numeric data
+
+obj = Series(["a", "a", "b", "c"] * 4)
+
+obj
+
+obj.describe()
+
+# Descriptive and summary stats
+# count, describe, min, max, argmin, argmax, idxmin, idxmax, quantile,
+# sum, mean, median, mad (mean absolute deviation from mean), prod,
+# var, std, skew, kurt, cumsum, cummin, cummax, cumprod, diff, pct_change
 
 # Correlation and covariance
 # --------------------------
+
+# stats using pairs of values
+
+import pickle
+
+price = pd.read_pickle("examples/yahoo_price.pkl")
+
+volume = pd.read_pickle("examples/yahoo_volume.pkl")
+
+returns = price.pct_change()
+
+returns
+
+
+
 
 # Unique values, value couns, and membership
 # ------------------------------------------
