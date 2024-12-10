@@ -478,7 +478,7 @@ obj2
 ##....
 
 
-# Indexing into a DataFame
+# Indexing into a DataFrame
 
 data = pd.DataFrame(np.arange(16).reshape((4, 4)), 
                     index=["Ohio", "Colorado", "Utah", "New York"],
@@ -1091,23 +1091,30 @@ data = pd.DataFrame({"Qu1":[1, 3, 4, 3, 4],
                      
 data
 
+# compute count values for one column
+
+data["Qu1"].value_counts().sort_index()
 
 
+# computer for count for all columns with pandas.value_counts
 
+result = data.apply(pd.value_counts).fillna(0)
 
+result
 
+# DataFrame.value_counts computes counts where
+# each row is tuple to determine values
 
+# produces index with distinct rows
+# as a hierchical index
 
+data = pd.DataFrame({"a":[1, 1, 1, 2, 2], "b":[0,0,1,0,0]})
 
+data
 
+data.value_counts()
 
-
-
-
-
-# Conclusion
-# ----------
-
+##
 
 
 
