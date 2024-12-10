@@ -1008,11 +1008,102 @@ returns = price.pct_change()
 
 returns
 
+returns.tail()
 
+# corr and cov with Series...
+# correlatoin of overlapping, non-NA, alignment by index of two Series
+# cov is covariance
+
+returns["MSFT"].corr(returns["IBM"])
+
+returns["MSFT"].cov(returns["IBM"])
+
+# corr and cov with DataFrame
+
+returns.corr()
+
+returns.cov()
+
+# corrwith computes pair-wise correlations between DataFrame and other
+# Series or DataFrame
+
+returns.corrwith(returns["IBM"])
+
+# Correlations between matching columns
+# e.g., percent changes with volume
+
+returns.corrwith(volume)
 
 
 # Unique values, value couns, and membership
-# ------------------------------------------
+# 
+
+obj = pd.Series(["c", "a", "d", "a", "a", "b", "b", "c", "c"])
+
+obj.sort_values()
+
+uniques = obj.unique()
+
+uniques
+
+# value_counts is a top-level pandas methods can be used with NumPy arrays
+# and other Python sequences
+
+pd.value_counts(obj.to_numpy(), sort=False)
+
+# the above throws deprecated warning, instead use:
+
+pd.Series(obj).value_counts()
+
+obj
+
+# isin can be used as a mask filter
+
+mask = obj.isin(["b", "c"])
+
+mask
+
+obj[mask]
+
+# related to isin is Index.get_indexer
+# below, to_match is compared to unique_values
+# and get_indexer generates the indexes of the matches
+
+to_match = pd.Series(["c", "a", "b", "b", "c", "a"])
+
+unique_vals = pd.Series(["c", "b", "a"])
+
+indices = pd.Index(unique_vals).get_indexer(to_match)
+
+indices 
+
+# Unique, value counts, and set membership methods
+# isin, get_indexer, unique, value_counts
+
+# computing a histogram of multiple related columns
+# in DataFrame
+
+data = pd.DataFrame({"Qu1":[1, 3, 4, 3, 4], 
+                    "Qu2":[2, 3, 1, 2, 3],
+                    "Qu3":[1, 5, 2, 4, 4]})
+                     
+        
+                     
+data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Conclusion
 # ----------
