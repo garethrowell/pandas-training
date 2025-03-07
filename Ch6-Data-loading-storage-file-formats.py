@@ -3,10 +3,22 @@
 # Ch 6 Data loading, storage and file formats
 # ----------------------------------------------------
 
+import numpy as np
+
+import pandas as pd
+
+from pandas import Series, DataFrame
+
+
 
 # ----------------------------------------------------
 # 6.1 Reading and writing data in text format
 # ----------------------------------------------------
+
+# C:\Users\GRowell\pydata-book\examples
+
+
+
 
 
 # Reading text files in pieces
