@@ -109,14 +109,114 @@ pd.read_csv("../pydata-book/examples/ex5.csv", na_values=sentinels, keep_default
 # Reading text files in pieces
 # ----------------------------
 
+pd.options.display.max_rows = 10
+
+result = pd.read_csv("../pydata-book/examples/ex6.csv")
+
+result
+
+
+pd.read_csv("../pydata-book/examples/ex6.csv", nrows=5)
+
+
+# chunksize is number of rows
+
+chunker = pd.read_csv("../pydata-book/examples/ex6.csv", chunksize=1000)
+
+type(chunker)
+
+# returns -> pandas.io.parsers.readers.TextFileReader
+# use to interate over csv file
+
+tot = pd.Series([], dtype='int64')
+for piece in chunker:
+    tot = tot.add(piece["key"].value_counts(), fill_value=0)
+    tot
+    
+tot = tot.sort_values(ascending=False)
+
+tot  = tot.sort_index()
 
 
 # Writing data to text format
 # ---------------------------
 
+data = pd.read_csv("../pydata-book/examples/ex5.csv")
+
+data.to_csv("out1.csv")
+
+# Using othter separators
+
+import sys
+
+data.to_csv(sys.stdout, sep="|")
+
+# Using a sentinel for a missing value
+
+data.to_csv(sys.stdout, na_rep="NULL")
+
+# default rows and column labels are written - disabled below
+
+data.to_csv(sys.stdout, index=False, header=False)
+
+# working with a subset of columns
+
+data.to_csv(sys.stdout, index=False, columns=["a", "b", "c"])
+
+
 
 # Working with other delimited formsts
 # ------------------------------------
+
+# here, using built-in Python csv module
+
+import csv
+
+f = open("../pydata-book/examples/ex7.csv")
+
+reader = csv.reader(f)
+
+for line in reader:
+    print(line)
+    
+f.close()
+
+# somne data wrangling
+
+with open("../pydata-book/examples/ex7.csv") as f:
+    lines = list(csv.reader(f))
+
+# split the lines into header and data
+
+header, values = lines[0], lines[1:]
+
+header
+
+values
+
+# create a dictionary of data columns
+# using dictionary comprehension
+# and zip(*values) - this is memory intensive
+
+data_dict = {h:  v for h, v in zip(header, zip(*values))}
+
+data_dict
+
+# many flavors of csv files - csv.Dialect
+
+class my_dialect(csv.Dialect):
+    lineterminator = "\n"
+    delimiter = ";"
+    quotechar = '"'
+    quoting = csv.QUOTE_MINIMAL
+
+
+
+
+
+  
+
+
 
 # JSON data
 # ---------
