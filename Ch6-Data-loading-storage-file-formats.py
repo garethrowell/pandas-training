@@ -60,13 +60,50 @@ pd.isna(result)
 
 
 
+# Using the na_values option
+
+result = pd.read_csv("../pydata-book/examples/ex5.csv", na_values=["NULL"])
+
+result
+
+pd.isna(result)
 
 
 
+#  Disabling the NaN value representations
+
+result2 = pd.read_csv("../pydata-book/examples/ex5.csv", keep_default_na=False)
+
+result2
+
+pd.isna(result2)
+
+
+result3 = pd.read_csv("../pydata-book/examples/ex5.csv", keep_default_na=False,
+                                               na_values=["NA"])
+
+result3
+
+pd.isna(result3)
 
 
 
+# Different NA sentinels specified by column in dictionary
 
+sentinels = {"message": ["foo", "NA"], "something":["two"]}
+
+
+pd.read_csv("../pydata-book/examples/ex5.csv", na_values=sentinels, keep_default_na=False)
+
+
+# some pandas.read_csv function arguments
+# ---------------------------------------
+# path, sep, delimiter, header, index_col, names,
+# skiprows, na_values, keep_default_na, comment,
+# parse_dates, keep_date_col, converters,
+# dayfirst, nrows, iterator, chunksize, skip_footer,
+# verbose, encoding, squeeze, thousands, 
+# decimel, engine
 
 
 # Reading text files in pieces
