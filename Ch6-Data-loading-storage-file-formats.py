@@ -235,24 +235,75 @@ with open("mydata.csv", "w") as f:
     write.writerow(("4", "5", "6"))
     write.writerow(("7", "8", "9"))
     
-    
-
-    
-    
-
-
-
-  
-
-
 
 # JSON data
 # ---------
+
+# example of a JSON record
+
+obj = """
+{"name": "Wes",
+ "cities_lived": ["Akron", "Nashville", "New York", "San Francisco"],
+ "pet": null,
+ "siblings": [{"name": "Scott", "age": 34, "hobbies": ["guitars", "soccer"]},
+              {"name": "Katie", "age": 42, "hobbies": ["diving", "art"]}]
+}
+"""
+
+# JSON basic types are objects (dictionaries), arrays (lists), strings,
+# numbers, Booleans, and nulls. All keys must be strings.
+
+# standard Python library
+
+import json
+
+result = json.loads(obj) # converts to Python form
+
+result
+
+asjson = json.dumps(result) # converts back to JSON
+
+asjson
+
+# passing list of dictionaries (from JSON objects) to 
+# DataFrame constructor and select subset of fields
+
+siblings = pd.DataFrame(result["siblings"], columns= ["name", "age"])
+
+siblings
+
+# exanples.example.json
+[{"a": 1, "b": 2, "c": 3},
+ {"a": 4, "b": 5, "c": 6},
+ {"a": 7, "b": 8, "c": 9}]
+
+data = pd.read_json("../pydata-book/examples/example.json")
+
+data
+
+# exporting to JSON
+data.to_json(sys.stdout)
+
+data.to_json(sys.stdout, orient="records")
 
 
 
 # XML and HTML: Web scraping
 # --------------------------
+
+# conda install lxml beautifulsoup4 html5lib
+
+tables = pd.read_html("../pydata-book/examples/fdic_failed_bank_list.html")
+
+tables
+
+
+
+
+
+
+
+
 
 
 
