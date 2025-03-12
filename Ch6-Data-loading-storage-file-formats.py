@@ -204,6 +204,11 @@ data_dict
 
 # many flavors of csv files - csv.Dialect
 
+import csv
+
+f = open("../pydata-book/examples/ex7.csv")
+
+
 class my_dialect(csv.Dialect):
     lineterminator = "\n"
     delimiter = ";"
@@ -211,6 +216,29 @@ class my_dialect(csv.Dialect):
     quoting = csv.QUOTE_MINIMAL
 
 
+reader = csv.reader(f, dialect=my_dialect)
+
+for line in reader:
+    print(line)
+    
+# CSV dialect options
+# delimiter, lineterminator, quotechar, 
+# quoting, skipinitialspace, doublequote,
+# escapechar
+
+# using csv.writer with dialect
+
+with open("mydata.csv", "w") as f:
+    write = csv.writer(f, dialect=my_dialect)
+    write.writerow(("one", "two", "three"))
+    write.writerow(("1", "2", "3"))
+    write.writerow(("4", "5", "6"))
+    write.writerow(("7", "8", "9"))
+    
+    
+
+    
+    
 
 
 
