@@ -297,11 +297,84 @@ tables = pd.read_html("../pydata-book/examples/fdic_failed_bank_list.html")
 
 tables
 
+len(tables)
+
+failures = tables[0]
+
+failures.head()
+
+close_timestamps = pd.to_datetime(failures["Closing Date"])
+
+close_timestamps.dt.year.value_counts()
+
+# parsing XML with lxml.objectify
+# data from the New York Metropolitan Transportation Authority (MTA)
+# xml data from a single train or bus service
+
+# Example - single record
+#<INDICATOR>
+#  <INDICATOR_SEQ>373889</INDICATOR_SEQ>
+#  <PARENT_SEQ></PARENT_SEQ>
+#  <AGENCY_NAME>Metro-North Railroad</AGENCY_NAME>
+#  <INDICATOR_NAME>Escalator Availability</INDICATOR_NAME>
+#  <DESCRIPTION>Percent of the time that escaltors are operational
+#  systemwide. The availability rate is based on physical observations performed
+#  the morning of regular business dayes only. This is a new indicator
+#  the agency began reporting in 2009.</DESCRIPTION>
+#  <PERIOD_YEAR>2011</PERIOD_YEAR>
+#  <PERIOD_MONTH>12</PERIOD_MONTH>
+#  <CATEGORY>Service Indicators</CATEGORY>
+#  <FREQUENCY>M</FREQUENCY>
+#  <DESIRED_CHANGE>U</DESIRED_CHANGE>
+#  <INDICATOR_UNIT>%<INDICATOR_UNIT>
+#  <DECIMAL_PLACES>1</DECIMAL_PLACES>
+#  <YTD_TARGET>97.00</YTD_TARGET>
+#  <YTD_ACTUAL></YTD_ACTUAL>
+#  <MONTHLY_TARGET>97.00</MONTHLY_TARGET>
+#  <MONTHLY_ACTUAL></MONTHLY_ACTUAL>
+#</INDICATOR>
+
+from lxml import objectify
+
+path = "../pydata-book/datasets/mta_perf/Performance_MNR.xml"
+
+with open(path) as f:
+    parse = objectify.parse(f)
+    
+root = parse.getroot()
+
+root.INDICATOR
+
+data=[]
+
+skip_fields = ["PARENT_SEQ", "INDICATOR_SEQ", 
+               "DESIRED_CHANGE", "DECIMAL_PLACES"]
+               
+               
+for elt in root.INDICATOR:
+    el_data = {}
+    for child in elt.getchildren():
+        if child.tag in skip_fields:
+            continue
+        el_data[child.tag] = child.pyval
+    data.append(el_data)
+    
+    
+pd.set_option('display.max_columns', None)
+
+    
+perf = pd.DataFrame(data)
+
+perf.head()
 
 
+# pandas.read_xml function does all of the above
 
+perf2 = pd.read_xml(path)
 
+perf2.head()
 
+# Use docstring for more complex XML
 
 
 
