@@ -377,12 +377,26 @@ perf2.head()
 # Use docstring for more complex XML
 
 
-
-
-
 # ----------------------------------------------------
 # 6.2 Binary Data Formats
 # ----------------------------------------------------
+
+frame = pd.read_csv("../pydata-book/examples/ex1.csv")
+
+frame
+
+# convert to pickle (Python binary format)
+# don't use this for long-term storage
+
+frame.to_pickle("frame_pickle")
+
+pd.read_pickle("frame_pickle")
+
+# other open-source binary formats
+# HDF5, ORC, and Apache Parquet
+
+fed = pd.read_parquet("../pydata-book/datasets/fec/fec.parquet")
+
 
 
 # Reading Microsoft Excel files
