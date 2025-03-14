@@ -398,9 +398,50 @@ pd.read_pickle("frame_pickle")
 fed = pd.read_parquet("../pydata-book/datasets/fec/fec.parquet")
 
 
-
 # Reading Microsoft Excel files
 # -----------------------------
+
+xlsx = pd.ExcelFile("../pydata-book/examples/ex1.xlsx")
+
+xlsx.sheet_names
+
+xlsx.parse(sheet_name="Sheet1")
+
+# indicating the index column
+
+xlsx.parse(sheet_name="Sheet1", index_col=0)
+
+# reading multiple sheets in a file
+
+frame = pd.read_excel("../pydata-book/examples/ex1.xlsx", sheet_name="Sheet1")
+
+frame
+
+# Writing pandas data to Excel
+
+writer =  pd.ExcelWriter("ex3.xlsx")
+
+# frame.to_excel(writer, "Sheet1") # gives FutureWarning
+
+frame.to_excel(writer, sheet_name='Sheet1', index=False)
+
+writer.save() # throws no attribute save error
+
+
+# from copilot -----------------------------------
+
+# Specify the file name
+file_name = "ex2.xlsx"
+
+# Write to the Excel file using ExcelWriter
+with pd.ExcelWriter(file_name, engine='openpyxl') as writer:
+    frame.to_excel(writer, sheet_name='Sheet1', index=False)
+
+print(f"Data has been written to {file_name}")
+
+# ----------------------------------- this works
+
+frame.to_excel("ex4.xlsx")
 
 
 # Using HDF5 Format
