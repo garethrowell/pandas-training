@@ -204,6 +204,11 @@ data_dict
 
 # many flavors of csv files - csv.Dialect
 
+import csv
+
+f = open("../pydata-book/examples/ex7.csv")
+
+
 class my_dialect(csv.Dialect):
     lineterminator = "\n"
     delimiter = ";"
@@ -211,30 +216,232 @@ class my_dialect(csv.Dialect):
     quoting = csv.QUOTE_MINIMAL
 
 
+reader = csv.reader(f, dialect=my_dialect)
 
+for line in reader:
+    print(line)
+    
+# CSV dialect options
+# delimiter, lineterminator, quotechar, 
+# quoting, skipinitialspace, doublequote,
+# escapechar
 
+# using csv.writer with dialect
 
-  
-
-
+with open("mydata.csv", "w") as f:
+    write = csv.writer(f, dialect=my_dialect)
+    write.writerow(("one", "two", "three"))
+    write.writerow(("1", "2", "3"))
+    write.writerow(("4", "5", "6"))
+    write.writerow(("7", "8", "9"))
+    
 
 # JSON data
 # ---------
+
+# example of a JSON record
+
+obj = """
+{"name": "Wes",
+ "cities_lived": ["Akron", "Nashville", "New York", "San Francisco"],
+ "pet": null,
+ "siblings": [{"name": "Scott", "age": 34, "hobbies": ["guitars", "soccer"]},
+              {"name": "Katie", "age": 42, "hobbies": ["diving", "art"]}]
+}
+"""
+
+# JSON basic types are objects (dictionaries), arrays (lists), strings,
+# numbers, Booleans, and nulls. All keys must be strings.
+
+# standard Python library
+
+import json
+
+result = json.loads(obj) # converts to Python form
+
+result
+
+asjson = json.dumps(result) # converts back to JSON
+
+asjson
+
+# passing list of dictionaries (from JSON objects) to 
+# DataFrame constructor and select subset of fields
+
+siblings = pd.DataFrame(result["siblings"], columns= ["name", "age"])
+
+siblings
+
+# exanples.example.json
+[{"a": 1, "b": 2, "c": 3},
+ {"a": 4, "b": 5, "c": 6},
+ {"a": 7, "b": 8, "c": 9}]
+
+data = pd.read_json("../pydata-book/examples/example.json")
+
+data
+
+# exporting to JSON
+data.to_json(sys.stdout)
+
+data.to_json(sys.stdout, orient="records")
 
 
 
 # XML and HTML: Web scraping
 # --------------------------
 
+# conda install lxml beautifulsoup4 html5lib
+
+tables = pd.read_html("../pydata-book/examples/fdic_failed_bank_list.html")
+
+tables
+
+len(tables)
+
+failures = tables[0]
+
+failures.head()
+
+close_timestamps = pd.to_datetime(failures["Closing Date"])
+
+close_timestamps.dt.year.value_counts()
+
+# parsing XML with lxml.objectify
+# data from the New York Metropolitan Transportation Authority (MTA)
+# xml data from a single train or bus service
+
+# Example - single record
+#<INDICATOR>
+#  <INDICATOR_SEQ>373889</INDICATOR_SEQ>
+#  <PARENT_SEQ></PARENT_SEQ>
+#  <AGENCY_NAME>Metro-North Railroad</AGENCY_NAME>
+#  <INDICATOR_NAME>Escalator Availability</INDICATOR_NAME>
+#  <DESCRIPTION>Percent of the time that escaltors are operational
+#  systemwide. The availability rate is based on physical observations performed
+#  the morning of regular business dayes only. This is a new indicator
+#  the agency began reporting in 2009.</DESCRIPTION>
+#  <PERIOD_YEAR>2011</PERIOD_YEAR>
+#  <PERIOD_MONTH>12</PERIOD_MONTH>
+#  <CATEGORY>Service Indicators</CATEGORY>
+#  <FREQUENCY>M</FREQUENCY>
+#  <DESIRED_CHANGE>U</DESIRED_CHANGE>
+#  <INDICATOR_UNIT>%<INDICATOR_UNIT>
+#  <DECIMAL_PLACES>1</DECIMAL_PLACES>
+#  <YTD_TARGET>97.00</YTD_TARGET>
+#  <YTD_ACTUAL></YTD_ACTUAL>
+#  <MONTHLY_TARGET>97.00</MONTHLY_TARGET>
+#  <MONTHLY_ACTUAL></MONTHLY_ACTUAL>
+#</INDICATOR>
+
+from lxml import objectify
+
+path = "../pydata-book/datasets/mta_perf/Performance_MNR.xml"
+
+with open(path) as f:
+    parse = objectify.parse(f)
+    
+root = parse.getroot()
+
+root.INDICATOR
+
+data=[]
+
+skip_fields = ["PARENT_SEQ", "INDICATOR_SEQ", 
+               "DESIRED_CHANGE", "DECIMAL_PLACES"]
+               
+               
+for elt in root.INDICATOR:
+    el_data = {}
+    for child in elt.getchildren():
+        if child.tag in skip_fields:
+            continue
+        el_data[child.tag] = child.pyval
+    data.append(el_data)
+    
+    
+pd.set_option('display.max_columns', None)
+
+    
+perf = pd.DataFrame(data)
+
+perf.head()
+
+
+# pandas.read_xml function does all of the above
+
+perf2 = pd.read_xml(path)
+
+perf2.head()
+
+# Use docstring for more complex XML
 
 
 # ----------------------------------------------------
 # 6.2 Binary Data Formats
 # ----------------------------------------------------
 
+frame = pd.read_csv("../pydata-book/examples/ex1.csv")
+
+frame
+
+# convert to pickle (Python binary format)
+# don't use this for long-term storage
+
+frame.to_pickle("frame_pickle")
+
+pd.read_pickle("frame_pickle")
+
+# other open-source binary formats
+# HDF5, ORC, and Apache Parquet
+
+fed = pd.read_parquet("../pydata-book/datasets/fec/fec.parquet")
+
 
 # Reading Microsoft Excel files
 # -----------------------------
+
+xlsx = pd.ExcelFile("../pydata-book/examples/ex1.xlsx")
+
+xlsx.sheet_names
+
+xlsx.parse(sheet_name="Sheet1")
+
+# indicating the index column
+
+xlsx.parse(sheet_name="Sheet1", index_col=0)
+
+# reading multiple sheets in a file
+
+frame = pd.read_excel("../pydata-book/examples/ex1.xlsx", sheet_name="Sheet1")
+
+frame
+
+# Writing pandas data to Excel
+
+writer =  pd.ExcelWriter("ex3.xlsx")
+
+# frame.to_excel(writer, "Sheet1") # gives FutureWarning
+
+frame.to_excel(writer, sheet_name='Sheet1', index=False)
+
+writer.save() # throws no attribute save error
+
+
+# from copilot -----------------------------------
+
+# Specify the file name
+file_name = "ex2.xlsx"
+
+# Write to the Excel file using ExcelWriter
+with pd.ExcelWriter(file_name, engine='openpyxl') as writer:
+    frame.to_excel(writer, sheet_name='Sheet1', index=False)
+
+print(f"Data has been written to {file_name}")
+
+# ----------------------------------- this works
+
+frame.to_excel("ex4.xlsx")
 
 
 # Using HDF5 Format
